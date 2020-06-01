@@ -1,5 +1,3 @@
-import { game } from "../index";
-
 export class AlignGrid
 {
 	constructor(config)

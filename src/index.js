@@ -1,37 +1,25 @@
-import Phaser from "phaser";
-import { SceneMain } from "./scenes/sceneMain";
-
-
-const config = {
-  type: Phaser.AUTO,
-  parent: "phaser-example",
-  width: 1500,
-  height: 700,
-  scale: {
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH
-  },
-  scene: [SceneMain]
-};
+import 'phaser';
+import config from './config/config';
+import GameScene from './Scenes/GameScene';
+import BootScene from './Scenes/BootScene';
+import PreloaderScene from './Scenes/PreloaderScene';
+import TitleScene from './Scenes/TitleScene';
+import OptionsScene from './Scenes/OptionsScene';
+import CreditsScene from './Scenes/CreditsScene';
 
 
 
-export const game = new Phaser.Game(config);
-
-
-function preload ()
-{
-    
+class Game extends Phaser.Game {
+  constructor () {
+    super(config);
+    this.scene.add('Boot', BootScene);
+    this.scene.add('Preloader', PreloaderScene);
+    this.scene.add('Title', TitleScene);
+    this.scene.add('Options', OptionsScene);
+    this.scene.add('Credits', CreditsScene);
+    this.scene.add('Game', GameScene);
+    this.scene.start('Game');
+  }
 }
-
-
-function create ()
-{
  
-}
-
-function update () {
- 
-
-
-}
+window.game = new Game();
