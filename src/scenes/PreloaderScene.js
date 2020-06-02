@@ -1,100 +1,117 @@
-
 import 'phaser';
+import {Align} from "../util/align";
+import {AlignGrid} from "../util/alignGrid";
+
+
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
     super('Preloader');
   }
 
-  init() {
-    this.readyCount = 0;
-  }
+ 
 
   preload() {
-    // add logo image
-    this.add.image(400, 150, 'logo');
-
-    // display progress bar
-    const progressBar = this.add.graphics();
-    const progressBox = this.add.graphics();
-    progressBox.fillStyle(0x222222, 0.8);
-    progressBox.fillRect(240, 270, 320, 50);
-
-    const { width } = this.cameras.main;
-    const { height } = this.cameras.main;
-    const loadingText = this.make.text({
-      x: width / 2,
-      y: height / 2 - 50,
-      text: 'Loading...',
-      style: {
-        font: '20px monospace',
-        fill: '#ffffff',
-      },
-    });
-    loadingText.setOrigin(0.5, 0.5);
-
-    const percentText = this.make.text({
-      x: width / 2,
-      y: height / 2 - 5,
-      text: '0%',
-      style: {
-        font: '18px monospace',
-        fill: '#ffffff',
-      },
-    });
-    percentText.setOrigin(0.5, 0.5);
-
-    const assetText = this.make.text({
-      x: width / 2,
-      y: height / 2 + 50,
-      text: '',
-      style: {
-        font: '18px monospace',
-        fill: '#ffffff',
-      },
-    });
-    assetText.setOrigin(0.5, 0.5);
-
-    // update progress bar
-    this.load.on('progress', (value) => {
-        console.log(value)
-      percentText.setText(`${parseInt(value * 100)}%`);
-      progressBar.clear();
-      progressBar.fillStyle(0xffffff, 1);
-      progressBar.fillRect(250, 280, 300 * value, 30);
-    });
-
-    // update file progress text
-    this.load.on('fileprogress', (file) => {
-      assetText.setText(`Loading asset: ${file.key}`);
-    });
-
-    // remove progress bar when complete
-    this.load.on('complete', () => {
-      progressBar.destroy();
-      progressBox.destroy();
-      loadingText.destroy();
-      percentText.destroy();
-      assetText.destroy();
-      this.ready();
-    });
-
-    this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
-
-    // load assets needed in our game
-    this.load.image('blueButton1', 'assets/ui/blue_button02.png');
-    this.load.image('blueButton2', 'assets/ui/blue_button03.png');
-    this.load.image('phaserLogo', 'assets/logo1.png');
-    this.load.image('box', 'assets/ui/grey_box.png');
-    this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
-    this.load.audio('bgMusic', ['assets/bensound-summer.mp3']);
-  }
-
-  ready() {
-    this.scene.start('Title');
-    this.readyCount++;
-    if (this.readyCount === 2) {
-      this.scene.start('Title');
+    // This "for" emulates false charging, delaying the bar sending 500 load image queries
+    for (var i = 0; i < 500; i++) {
+        this.load.image('load'+i, 'null'+i);
     }
+
+    // create and aligned progress Bar and container. Render first Progress container
+    let progressBar = this.add.graphics();
+    let progressContainer = this.add.graphics();
+    Align.center(progressBar)
+    Align.center(progressContainer)
+    progressContainer.fillStyle(0x222222, 0.8);
+    progressContainer.fillRect(-160, -10, 320, 50);
+
+    // Lets add and center loading, percentage and charged files texts
+    let loadingText = this.make.text({
+      x:0,
+      y:0,
+      text: 'Loading',
+      style : {
+        font: '30px monospace',
+        fill: '#ffffff'
+      }
+    })
+    Align.center(loadingText.setOrigin(0.5, 1.6))
+
+    let percentText = this.make.text({
+      x:0,
+      y:0,
+      text: '0%',
+      style : {
+        font: '20px monospace',
+        fill: '#ffffff'
+      }
+    })
+
+    Align.center(percentText.setOrigin(0.4, -0.2))
+
+    let fileText = this.make.text({
+      x:0,
+      y:0,
+      text: '',
+      style : {
+        font: '20px monospace',
+        fill: '#ffffff'
+      }
+    })
+
+    Align.center(fileText.setOrigin(0.5, -2.5))
+   
+   /* 
+
+    PROGRESS: used for see each loaded file (in ths case it was uploaded 501 images. 
+    1 from the other scene and 500 false image calls) CB VALUE: divides each load operation between 0 to 1
+   
+    FILEPROGRESS: returns from each load operation, its correspondly loaded file
+
+    COMPLETE: When progress reach 1 it does whatever is needed
+
+   */ 
+    this.load.on('progress', value => {
+      //console.log(value);
+      progressBar.clear()
+      progressBar.fillStyle(0xffffff,1)
+      progressBar.fillRect(-150, 0, 300 * value, 30);
+      percentText.setText(`${Math.floor(value*100)}%`)
+    });
+                
+    this.load.on('fileprogress', file => {
+      //console.log(file.src);
+      fileText.setText(`Loading asserts:${file.src}`)
+      
+    });
+
+    this.load.on('complete', () => {
+        //console.log('complete');
+        progressBar.destroy()
+        progressContainer.destroy()
+        loadingText.destroy()
+        percentText.destroy()
+        fileText.destroy()
+    });
+
+
   }
+
+  create () {  
+    let zenva = this.add.image(400,590,'zenva')
+    Align.center(zenva)
+    //this.scene.start('Menu')
+  }
+
+  createLoadingBar () {
+    //Title
+    this.title = new Text()
+
+    //Progress Text
+
+    this.txt_progress = new Text()
+
+    //Progress Bar
+  }
+    
 }

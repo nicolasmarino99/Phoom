@@ -1,8 +1,8 @@
 import 'phaser';
  
-export default class OptionsScene extends Phaser.Scene {
+export default class MenuScene extends Phaser.Scene {
   constructor () {
-    super('Options');
+    super('Menu');
   }
  
   preload () {
