@@ -1,8 +1,7 @@
 import 'phaser';
 import {Align} from "../util/align";
-import {AlignGrid} from "../util/alignGrid";
-import fontPng from "../assets/fonts/font.png";
-//mport fontFnt from "../assets/fonts/font.fnt";
+
+
 
 
 
@@ -19,11 +18,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
     //load custom Fonts
 
-    this.load.bitmapFont(
-      'font',
-      './src/assets/fonts/diabolic/font.png',
-      './src/assets/fonts/diabolic/font.fnt'
-    )
+    
 
     // This "for" emulates false charging, delaying the bar sending 500 load image queries
     //for (var i = 0; i < 500; i++) {
@@ -111,18 +106,9 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   create () {  
-    let logo = this.add.bitmapText(
-      0,
-      0,
-      'font',
-      'PHOOM',
-      166
-    )
-    let agrid = new AlignGrid({scene:this, rows: 10, cols: 15})
-    agrid.showNumbers()
-    agrid.placeAtIndex(34,logo)
+    
 
-    //this.scene.start('Menu')
+    this.scene.start('Menu')
   }
 
   
