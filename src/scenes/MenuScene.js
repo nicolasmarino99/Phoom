@@ -22,16 +22,18 @@ export default class MenuScene extends Phaser.Scene {
   }
   
   create () {
-    window.scene = this
+    
 
     this.far = this.add.tileSprite(0, 
-      200,//this.height - this.cache.getImage('far').height, 
-      this.width, 
-      this.cache.getImage('far').height, 
+      0,
+      this.game.config.width, 
+      this.game.config.height, 
       'far'
     );
+    this.far.setOrigin(0,0)
+    this.far.setOrigin(0)
 
-    this.sand = this.add.tileSprite(0, 
+    /*this.sand = this.add.tileSprite(0, 
         200,//this.height - this.cache.getImage('sand').height, 
         this.width, 
         this.cache.getImage('sand').height, 
@@ -43,9 +45,9 @@ export default class MenuScene extends Phaser.Scene {
         this.width, 
         this.cache.getImage('foreground-merged').height, 
         'foreground-merged'
-    );
+    );*/
 
-    rainFrame = this.add.sprite(0,0,'rain',0)
+    this.rainFrame = this.add.sprite(0,0,'rain',0)
     let logo = this.add.bitmapText(
       0,
       0,
@@ -61,7 +63,7 @@ export default class MenuScene extends Phaser.Scene {
 
     this.anims.create({
       key: 'rainy',
-      frames: 'far',
+      frames: this.anims.generateFrameNames('rain', {start: 1, end: 4, zeroPad: 2, prefix: 'rain_drops-', suffix: '.png'}),
       frameRate: 16,
       repeat: -1
     })
@@ -73,16 +75,16 @@ export default class MenuScene extends Phaser.Scene {
 
     let agrid = new AlignGrid({scene:this, rows: 10, cols: 15})
     agrid.showNumbers()
-    agrid.placeAtIndex(35,logo)
+    agrid.placeAtIndex(34,logo)
   }
 
   update () {
-    let rainAnim = rainFrame.anims.play('rainy',true)
+    let rainAnim = this.rainFrame.anims.play('rainy',true)
     Align.center(rainAnim)
     Align.scaleToGameW(rainAnim,1)
 
-    this.far.tilePosition.x -= 0.05;
-    this.sand.tilePosition.x -= 0.3;
-    this.mountainsMid2.tilePosition.x -= 0.75;  
+    this.far.tilePositionX -= 0.05;
+    //this.sand.tilePosition.x -= 0.3;
+    //this.mountainsMid2.tilePosition.x -= 0.75;  
   }
 };
