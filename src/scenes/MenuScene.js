@@ -17,35 +17,47 @@ export default class MenuScene extends Phaser.Scene {
     )
     
     this.load.image('far', './src/assets/ui/background/far.png');
-		this.load.image('sand', './src/assets/ui/background/far.png');
+		this.load.image('sand', './src/assets/ui/background/sand.png');
 		this.load.image('foreground-merged', './src/assets/ui/background/foreground-merged.png');
   }
   
   create () {
     
 
-    this.far = this.add.tileSprite(0, 
+   this.far = this.add.tileSprite(
+     0, 
+     0,
+     this.game.config.width, 
+     this.game.config.height, 
+     'far'
+   );
+   this.far.setOrigin(0,0)
+   this.far.setScrollFactor(0)
+
+    this.sand = this.add.tileSprite(
+      0, 
       0,
       this.game.config.width, 
       this.game.config.height, 
-      'far'
-    );
-    this.far.setOrigin(0,0)
-    this.far.setOrigin(0)
-
-    /*this.sand = this.add.tileSprite(0, 
-        200,//this.height - this.cache.getImage('sand').height, 
-        this.width, 
-        this.cache.getImage('sand').height, 
-        'sand'
+      'sand'
     );
 
-    this.foregroundMerged = this.add.tileSprite(0, 
-        200,//this.height - this.cache.getImage('foreground-merged').height, 
-        this.width, 
-        this.cache.getImage('foreground-merged').height, 
-        'foreground-merged'
-    );*/
+    this.sand.setOrigin(0,0)
+    this.sand.setScrollFactor(0)
+
+    this.foregroundMerged = this.add.tileSprite( 
+      0, 
+      0,
+      this.game.config.width,
+      this.game.config.height,
+      'foreground-merged'
+    );
+
+    this.foregroundMerged.setOrigin(0,0)
+    this.foregroundMerged.setScrollFactor(0)
+
+
+
 
     this.rainFrame = this.add.sprite(0,0,'rain',0)
     let logo = this.add.bitmapText(
@@ -53,7 +65,7 @@ export default class MenuScene extends Phaser.Scene {
       0,
       'font',
       'PHOOM',
-      166
+      186
     )
     
     frameNames = this.textures.get('rain').getFrameNames()
@@ -83,8 +95,11 @@ export default class MenuScene extends Phaser.Scene {
     Align.center(rainAnim)
     Align.scaleToGameW(rainAnim,1)
 
-    this.far.tilePositionX -= 0.05;
-    //this.sand.tilePosition.x -= 0.3;
-    //this.mountainsMid2.tilePosition.x -= 0.75;  
+    this.far.tilePositionX += 0.1;
+    Align.scaleToGameW(this.far,2)
+    this.sand.tilePositionX += 0.3;
+    Align.scaleToGameW(this.sand,3.2)
+    this.foregroundMerged.tilePositionX += 0.75; 
+    Align.scaleToGameW(this.foregroundMerged,3.7) 
   }
 };
