@@ -23,7 +23,7 @@ export default class MenuScene extends Phaser.Scene {
     this.load.image('foreground-merged', './src/assets/ui/background/foreground-merged.png');
     
     // Load buttons
-    this.load.audio('menuMusic', ['./src/assets/music/menuMusic.ogg']);
+    this.load.audio('menuMusic', ['./src/assets/music/menu/menuMusic.ogg']);
     this.load.image('blueButton1', './src/assets/ui/buttons/PNG/shiny/7.png');
     this.load.image('blueButton2', './src/assets/ui/buttons/PNG/shiny/7shiny.png');
 
@@ -32,6 +32,8 @@ export default class MenuScene extends Phaser.Scene {
   create () {
     let agrid = new AlignGrid({scene:this, rows: 10, cols: 25})
     
+    this.input.setDefaultCursor('url(./src/assets/ui/cursor/cursor1.png), pointer')
+
     this.bgMusic = this.sound.add('menuMusic', { volume: 0.2, loop: true });
     window.music = this.bgMusic
     this.bgMusic.play();
