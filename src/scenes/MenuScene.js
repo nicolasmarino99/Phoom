@@ -50,7 +50,7 @@ export default class MenuScene extends Phaser.Scene {
     
     
     this.gameButton.on('pointerdown', pointer =>  {
-      this.scene.start('Game');
+      this.scene.start('Boot');
       this.bgMusic.stop();
     });
     

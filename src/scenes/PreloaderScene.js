@@ -21,9 +21,9 @@ export default class PreloaderScene extends Phaser.Scene {
     
 
     // This "for" emulates false charging, delaying the bar sending 500 load image queries
-    //for (var i = 0; i < 500; i++) {
-    //    this.load.image('load'+i, 'null'+i);
-    //}
+    for (var i = 0; i < 500; i++) {
+        this.load.image('load'+i, 'null'+i);
+    }
 
     // create and aligned progress Bar and container. Render first Progress container
     let progressBar = this.add.graphics();
@@ -108,7 +108,7 @@ export default class PreloaderScene extends Phaser.Scene {
   create () {  
     
 
-    this.scene.start('Menu')
+    this.scene.start('Game')
   }
 
   
