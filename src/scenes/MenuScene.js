@@ -1,8 +1,8 @@
 import 'phaser';
 import {AlignGrid} from "../util/alignGrid";
 import {Align} from "../util/align";
-let rainFrame 
-let frameNames
+
+
 export default class MenuScene extends Phaser.Scene {
   constructor () {
     super('Menu');
@@ -10,19 +10,55 @@ export default class MenuScene extends Phaser.Scene {
  
   preload () {
     this.load.atlas('rain','./src/assets/ui/rain/rain.png','./src/assets/ui/rain/rain.json')
+
     this.load.bitmapFont(
       'font',
       './src/assets/fonts/menu/font.png',
       './src/assets/fonts/menu/font.fnt'
     )
-    
+  
+    // Load paralax layers
     this.load.image('far', './src/assets/ui/background/far.png');
 		this.load.image('sand', './src/assets/ui/background/sand.png');
-		this.load.image('foreground-merged', './src/assets/ui/background/foreground-merged.png');
+    this.load.image('foreground-merged', './src/assets/ui/background/foreground-merged.png');
+    
+    // Load buttons
+    this.load.audio('menuMusic', ['./src/assets/music/menuMusic.ogg']);
+    this.load.image('blueButton1', './src/assets/ui/buttons/PNG/shiny/7.png');
+    this.load.image('blueButton2', './src/assets/ui/buttons/PNG/shiny/7shiny.png');
+
   }
   
   create () {
+    let agrid = new AlignGrid({scene:this, rows: 10, cols: 25})
     
+    this.bgMusic = this.sound.add('menuMusic', { volume: 0.2, loop: true });
+    window.music = this.bgMusic
+    this.bgMusic.play();
+
+
+    this.gameButton = this.add.sprite(100, 200, 'blueButton1').setInteractive();
+    Align.scaleToGameW(this.gameButton ,0.2)
+    agrid.placeAtIndex(162,this.gameButton)
+    this.gameButton.depth=100
+ 
+    this.gameText = this.add.text(0, 0, 'Play', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '40px', fill: '#fff' });
+    agrid.placeAtIndex(161,this.gameText.setOrigin(-0.3,0.5))
+    this.gameText.depth=101
+    
+    
+    this.gameButton.on('pointerdown', pointer =>  {
+      this.scene.start('Game');
+      this.bgMusic.stop();
+    });
+    
+    this.input.on('pointerover', function (event, gameObjects) {
+      gameObjects[0].setTexture('blueButton2');
+    });
+    
+    this.input.on('pointerout', function (event, gameObjects) {
+      gameObjects[0].setTexture('blueButton1');
+    });
 
    this.far = this.add.tileSprite(
      0, 
@@ -68,8 +104,8 @@ export default class MenuScene extends Phaser.Scene {
       186
     )
     
-    frameNames = this.textures.get('rain').getFrameNames()
-    console.log(frameNames)
+    this.frameNames = this.textures.get('rain').getFrameNames()
+    
 
     //Animation to the rain
 
@@ -85,9 +121,9 @@ export default class MenuScene extends Phaser.Scene {
 
    
 
-    let agrid = new AlignGrid({scene:this, rows: 10, cols: 15})
-    agrid.showNumbers()
-    agrid.placeAtIndex(34,logo)
+    //agrid.showNumbers()
+
+    agrid.placeAtIndex(57,logo)
   }
 
   update () {
