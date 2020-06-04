@@ -15,15 +15,15 @@ export default class PreloaderScene extends Phaser.Scene {
   preload() {
 
     
-
+    this.load.image('tiles', './src/assets/level1/map/tileset.png');
+    this.load.tilemapCSV('level1CSV','./src/assets/level1/map/level1.csv')
+    this.load.tilemapTiledJSON('level1JSON','./src/assets/level1/map/level1.json')
     //load custom Fonts
 
     
 
     // This "for" emulates false charging, delaying the bar sending 500 load image queries
-    for (var i = 0; i < 500; i++) {
-        this.load.image('load'+i, 'null'+i);
-    }
+    
 
     // create and aligned progress Bar and container. Render first Progress container
     let progressBar = this.add.graphics();
