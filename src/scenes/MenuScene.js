@@ -39,7 +39,7 @@ export default class MenuScene extends Phaser.Scene {
     this.bgMusic.play();
 
 
-    this.gameButton = this.add.sprite(100, 200, 'blueButton1').setInteractive();
+    this.gameButton = this.add.sprite(0, 0, 'blueButton1').setInteractive();
     Align.scaleToGameW(this.gameButton ,0.2)
     agrid.placeAtIndex(162,this.gameButton)
     this.gameButton.depth=100

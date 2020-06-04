@@ -1,5 +1,5 @@
 import 'phaser';
-import zenva from '../assets/zenva_logo.png';
+
 
 export default class BootScene extends Phaser.Scene {
   constructor () {
@@ -7,7 +7,6 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload () {
-    this.load.image('zenva', zenva);
   }
 
   create () {
