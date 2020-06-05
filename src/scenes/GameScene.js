@@ -14,6 +14,27 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create () {
+
+    const rescaleY = 80
+    this.bg_1 = this.add.tileSprite(0,0,this.game.config.width,this.game.config.height,'bg_1')
+    this.bg_1.setOrigin(0,0)
+    this.bg_1.setScrollFactor(0)
+    Align.scaleToGameW(this.bg_1,2.5)
+
+    this.bg_2 = this.add.tileSprite(0,rescaleY,this.game.config.width,this.game.config.height,'bg_2')
+    this.bg_2.setOrigin(0,0)
+    this.bg_2.setScrollFactor(0,2)
+    Align.scaleToGameW(this.bg_2,2.5)
+
+    this.bg_3 = this.add.tileSprite(0,-235+rescaleY,this.game.config.width,235,'bg_3')
+    this.bg_3.setOrigin(0,0)
+    this.bg_3.setScrollFactor(0,2)
+    
+
+   
+    
+
+
     const map = this.make.tilemap({ key: 'level1JSON'})
     const tileset = map.addTilesetImage('sea','tiles')
     const layerPlatforms = map.createStaticLayer('level1Map', tileset)
@@ -125,11 +146,15 @@ export default class GameScene extends Phaser.Scene {
     
     this.camera = this.cameras.main;
     this.camera.startFollow(this.hero);
+    
     this.camera.setFollowOffset(-300, 165);
     this.hero.anims.play("idle")
   }
 
   update() {
+    this.bg_1.tilePositionX = this.camera.scrollX * 0.6
+    this.bg_2.tilePositionX = this.camera.scrollX * 2
+    this.bg_3.tilePositionX = this.camera.scrollX * 1
     
     if (this.keyZ.isDown) {
       this.hero.anims.play("attack1", true)
