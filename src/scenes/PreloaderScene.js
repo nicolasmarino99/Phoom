@@ -1,6 +1,7 @@
 import 'phaser';
 import {Align} from "../util/align";
-
+import heroimg from '../assets/level1/mainCharacter/herojh.png';
+import heroJSON from '../assets/level1/mainCharacter/herojh.json';
 
 
 
@@ -18,6 +19,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('tiles', './src/assets/level1/map/tileset.png');
     this.load.tilemapCSV('level1CSV','./src/assets/level1/map/level1.csv')
     this.load.tilemapTiledJSON('level1JSON','./src/assets/level1/map/level1.json')
+    this.load.atlas('hero',heroimg ,heroJSON)
     //load custom Fonts
 
     
