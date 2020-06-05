@@ -1,5 +1,4 @@
 import 'phaser';
-import logo from '../assets/logo.png'
 import {Align} from "../util/align";
 
 export default class GameScene extends Phaser.Scene {
@@ -15,18 +14,18 @@ export default class GameScene extends Phaser.Scene {
 
   create () {
 
-    const rescaleY = 80
-    this.bg_1 = this.add.tileSprite(0,0,this.game.config.width,this.game.config.height,'bg_1')
-    this.bg_1.setOrigin(0,0)
-    this.bg_1.setScrollFactor(0)
-    Align.scaleToGameW(this.bg_1,2.5)
+    const rescaleY = -180
+    this.bg_1 = this.add.tileSprite(0,-500,this.game.config.width,this.game.config.height,'bg_1')
+    this.bg_1.setOrigin(0)
+    this.bg_1.setScrollFactor(0,2)
+    Align.scaleToGameW(this.bg_1,3.5)
 
-    this.bg_2 = this.add.tileSprite(0,rescaleY,this.game.config.width,this.game.config.height,'bg_2')
+    this.bg_2 = this.add.tileSprite(0,50-rescaleY,this.game.config.width,this.game.config.height,'bg_2')
     this.bg_2.setOrigin(0,0)
     this.bg_2.setScrollFactor(0,2)
     Align.scaleToGameW(this.bg_2,2.5)
 
-    this.bg_3 = this.add.tileSprite(0,-235+rescaleY,this.game.config.width,235,'bg_3')
+    this.bg_3 = this.add.tileSprite(0,-180-rescaleY,this.game.config.width,235,'bg_3')
     this.bg_3.setOrigin(0,0)
     this.bg_3.setScrollFactor(0,2)
     
@@ -51,7 +50,7 @@ export default class GameScene extends Phaser.Scene {
     })
 
 
-    this.hero = this.physics.add.sprite(200,200,'hero').setBounce(0.3)
+    this.hero = this.physics.add.sprite(200,310,'hero').setBounce(0.3)
     //this.hero.setCollideWorldBounds(true)
 
     this.physics.add.collider(this.hero,layerPlatforms)
@@ -101,7 +100,8 @@ export default class GameScene extends Phaser.Scene {
     this.anims.create({
       key: 'attack1',
       frames: this.anims.generateFrameNames('hero', {start: 0, end: 4, zeroPad: 2, prefix: 'adventurer-attack1-', suffix: '.png'}),
-      frameRate: 8, 
+      frameRate: 18, 
+      repeat: 1
     })
     this.anims.create({
       key: 'attack2',
@@ -135,11 +135,12 @@ export default class GameScene extends Phaser.Scene {
     
 
     
+    this.keys = this.input.keyboard.addKeys('Z,X,A,S')
 
-    this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
-    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)    
+    
+    
+    
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -148,24 +149,70 @@ export default class GameScene extends Phaser.Scene {
     this.camera.startFollow(this.hero);
     
     this.camera.setFollowOffset(-300, 165);
-    this.hero.anims.play("idle")
+    //this.input.keyboard.on('keydown_W', this.hero.anims.play("attack1", true),this);
+    this.keys.A.on('down', () => {
+      console.log('asdfasd')
+      this.hero.anims.play("attack2", true)
+      
+    })
+    //this.hero.anims.play("idle")
+    this.keyCombo = this.input.keyboard.createCombo([this.keys.Z,this.keys.Z,this.keys.Z], {
+      resetOnWrongKey: true,
+      maxKeyDelay: 0,
+      resetOnMatch: false,
+      deleteOnMatch: false,
+
+
+    });
+
+    
+  
   }
 
+
+
   update() {
-    this.bg_1.tilePositionX = this.camera.scrollX * 0.6
-    this.bg_2.tilePositionX = this.camera.scrollX * 2
-    this.bg_3.tilePositionX = this.camera.scrollX * 1
     
-    if (this.keyZ.isDown) {
-      this.hero.anims.play("attack1", true)
+    this.bg_1.tilePositionX = this.camera.scrollX * 0.6
+    this.bg_2.tilePositionX = this.camera.scrollX * 1
+    this.bg_3.tilePositionX = this.camera.scrollX * 2
+    this.bg_1.tilePositionX = this.camera.scrollY * 0
+    this.bg_2.tilePositionX = this.camera.scrollY * 0
+    this.bg_3.tilePositionX = this.camera.scrollY * 0
+    
+    
+    //this.hero.anims.play("idle",true)
+    //this.keys.A.on('down', () => {
+    //  console.log('asdfasd')
+    //  this.hero.anims.play("attack2", true)
+    //  
+    //})
+    
+    if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+      const animComplete = (animation, frame) =>
+      {this.hero.play('attack1',true);
+      //  Animation is over, let's fade the sprite out
+      this.tweens.add({
+          targets: this.hero,
+          duration: 3000,
+          alpha: 0
+      });
+  }
+
+    //  Animation will repeat twice and then emit the event
+    this.hero.on('animationcomplete', animComplete, this);
+
+    
+      
     
     }  else if (this.cursors.right.isDown ) {
         this.hero.setVelocityX(100)
+        this.hero.flipX=false
         if (this.cursors.shift.isDown) {
             this.hero.setVelocityX(170)
             
             this.hero.anims.play("runSlow",true) 
-            //this.hero.anims.play("walk",false)
+            
         } else if(this.cursors.down.isDown) {
             this.hero.anims.play("slide",true) 
 
@@ -179,21 +226,33 @@ export default class GameScene extends Phaser.Scene {
     } else if (this.cursors.left.isDown) { 
         
         this.hero.setVelocityX(-120)
-        this.hero.anims.play("runSlow",true)
+        
+        this.hero.flipX=true
+        if (this.cursors.shift.isDown) {
+          this.hero.setVelocityX(-170)
+          
+          this.hero.anims.play("runSlow",true) 
+          
+      } else if(this.cursors.down.isDown) {
+          this.hero.anims.play("slide",true) 
+
+      } else {
+          this.hero.anims.play("run",true)
+      }
       
     }
     else {
         
         this.hero.setVelocityX(0);
-        this.hero.anims.play("idle")
+        this.hero.anims.play("idle",true)
         
         
     }
-    if (this.cursors.up.isDown && this.hero.body.touching.down) {
+    if (this.cursors.up.isDown ) {
         this.hero.setVelocityY(-400)
         this.hero.anims.play("jump1",true)
         
     }
-    
+
   }
 };
