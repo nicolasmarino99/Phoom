@@ -2,6 +2,8 @@ import 'phaser';
 import {Align} from "../util/align";
 import heroimg from '../assets/level1/mainCharacter/herojh.png';
 import heroJSON from '../assets/level1/mainCharacter/herojh.json';
+import mushroomimg from '../assets/level1/enemies/Mushroom/mushroom.png'
+import mushroomJSON from '../assets/level1/enemies/Mushroom/mushroom.json';
 
 
 
@@ -20,10 +22,12 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.tilemapCSV('level1CSV','./src/assets/level1/map/level1.csv')
     this.load.tilemapTiledJSON('level1JSON','./src/assets/level1/map/level1.json')
     this.load.atlas('hero',heroimg ,heroJSON)
+    this.load.atlas('mushroom',mushroomimg ,mushroomJSON)
     this.load.image('bg_1', './src/assets/level1/map/sky.png');
     this.load.image('bg_2', './src/assets/level1/map/sea.png');
     this.load.image('bg_3', './src/assets/level1/map/clouds.png');
     this.load.image('bg_4', './src/assets/level1/map/far-grounds.png');
+    
     //load custom Fonts
 
     

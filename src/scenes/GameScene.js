@@ -51,15 +51,28 @@ export default class GameScene extends Phaser.Scene {
 
 
     this.hero = this.physics.add.sprite(200,310,'hero').setBounce(0.3)
+    this.mushroom = this.physics.add.sprite(400,230,'mushroom').setBounce(0.3)
     //this.hero.setCollideWorldBounds(true)
 
     this.physics.add.collider(this.hero,layerPlatforms)
+    this.physics.add.collider(this.mushroom,layerPlatforms)
     
     Align.scaleToGameW(this.hero, 0.08)
+    Align.scaleToGameW(this.mushroom, 0.2)
 
-    let frameNames = this.textures.get('hero').getFrameNames()
+    let frameNames = this.textures.get('mushroom').getFrameNames()
     console.log(frameNames)
 
+    /* Mushroom animations */
+    this.anims.create({
+      key: 'attack',
+      frames: this.anims.generateFrameNames('mushroom', {start: 0, end: 3, zeroPad: 1, prefix: 'Attack2-', suffix: '.png'}),
+      frameRate: 9, 
+      repeat: -1
+    })
+
+
+    /* Hero animations */
     this.anims.create({
       key: 'idle',
       frames: this.anims.generateFrameNames('hero', {start: 0, end: 3, zeroPad: 2, prefix: 'adventurer-idle-2-', suffix: '.png'}),
@@ -136,26 +149,21 @@ export default class GameScene extends Phaser.Scene {
 
     
     this.keys = this.input.keyboard.addKeys('Z,X,A,S')
-
-    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)    
-    
-    
-    
-
     this.cursors = this.input.keyboard.createCursorKeys();
 
     
     this.camera = this.cameras.main;
     this.camera.startFollow(this.hero);
-    
+    this.hero.body.setSize(this.hero.width*0.5,this.hero.height*0.8)
+    this.hero.body.offset.x = 10
+    this.hero.body.offset.y = 6
+    this.mushroom.body.setSize(50,60)
+    this.mushroom.body.offset.x = 50
+    this.mushroom.body.offset.y = 40
     this.camera.setFollowOffset(-300, 165);
-    //this.input.keyboard.on('keydown_W', this.hero.anims.play("attack1", true),this);
-    this.keys.A.on('down', () => {
-      console.log('asdfasd')
-      this.hero.anims.play("attack2", true)
-      
-    })
-    //this.hero.anims.play("idle")
+    
+    
+    
     this.keyCombo = this.input.keyboard.createCombo([this.keys.Z,this.keys.Z,this.keys.Z], {
       resetOnWrongKey: true,
       maxKeyDelay: 0,
@@ -172,7 +180,7 @@ export default class GameScene extends Phaser.Scene {
 
 
   update() {
-    
+    this.mushroom.anims.play('attack',true)
     this.bg_1.tilePositionX +=  0.6
     this.bg_2.tilePositionX +=  2
     this.bg_3.tilePositionX +=  0.5
@@ -181,13 +189,7 @@ export default class GameScene extends Phaser.Scene {
       this.hero.setVelocityY(-200)
       this.hero.anims.play("jump1",true)
     },this)
-    //this.hero.anims.play("idle",true)
-    //this.keys.A.on('down', () => {
-    //  console.log('asdfasd')
-    //  this.hero.anims.play("attack2", true)
-    //  
-    //})
-    
+  
     if (this.keys.Z.isDown) {
       
       this.hero.play('attack1',true);
