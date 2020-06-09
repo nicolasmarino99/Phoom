@@ -54,7 +54,7 @@ export default class GameScene extends Phaser.Scene {
 
 
     this.hero = this.physics.add.sprite(200,310,'hero').setBounce(0.3)
-    
+    this.boss = this.physics.add.sprite(6700,210,'boss')
     this.mushrooms1 = this.physics.add.group({
       key: 'mushroom',
       repeat: 2,
@@ -75,17 +75,40 @@ export default class GameScene extends Phaser.Scene {
       repeat: 4,
       setXY: { x: 4000, y: 230, stepX: 160 }
     })
+    this.skeleton1 = this.physics.add.group({
+      key: 'skeleton',
+      repeat: 2,
+      setXY: { x: 5000, y: 230, stepX: 180 }
+    })
+    this.skeleton2 = this.physics.add.group({
+      key: 'skeleton',
+      repeat: 1,
+      setXY: { x: 6000, y: 230, stepX: 160 }
+    })
     this.coinsb = this.physics.add.group({
       key: 'cb',
       repeat: 11*5,
       setXY: { x: 19, y: 0, stepX: 70 }
     })
-    
+    this.coinsg = this.physics.add.group({
+      key: 'cg',
+      repeat: 11*3,
+      setXY: { x: 4100, y: 0, stepX: 70 }
+    })
+    this.coinso = this.physics.add.group({
+      key: 'co',
+      repeat: 11,
+      setXY: { x: 5500, y: 0, stepX: 70 }
+    })
 
     
     //Colliders
     this.physics.add.collider(this.coinsb, layerPlatforms);
+    this.physics.add.collider(this.coinsg, layerPlatforms);
+    this.physics.add.collider(this.coinso, layerPlatforms);
     this.physics.add.collider(this.hero,layerPlatforms)
+    this.physics.add.collider(this.boss,layerPlatforms)
+    this.physics.add.collider(this.boss,this.hero)
     this.physics.add.collider(this.mushrooms1,layerPlatforms)
     this.physics.add.collider(this.mushrooms2,layerPlatforms)
     this.physics.add.collider(this.mushrooms1,this.hero)
@@ -94,8 +117,13 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.goblin2,layerPlatforms)
     this.physics.add.collider(this.goblin1,this.hero)
     this.physics.add.collider(this.goblin2,this.hero)
+    this.physics.add.collider(this.skeleton1,layerPlatforms)
+    this.physics.add.collider(this.skeleton2,layerPlatforms)
+    this.physics.add.collider(this.skeleton1,this.hero)
+    this.physics.add.collider(this.skeleton2,this.hero)
     
     Align.scaleToGameW(this.hero, 0.08)
+    Align.scaleToGameW(this.boss, 0.18)
     Align.scaleToGameW(this.coinsb, 2)
 
     //Adjust camara settings and collider hero size
@@ -111,13 +139,14 @@ export default class GameScene extends Phaser.Scene {
     //console.log(frameNames)
 
     this.physics.add.overlap(this.hero, this.coinsb, collectCoin, null, this);
-    
+    this.physics.add.overlap(this.hero, this.coinsg, collectCoin, null, this);
+    this.physics.add.overlap(this.hero, this.coinso, collectCoin, null, this);
     
 
 
     this.coinMusic = this.sound.add('coinMusic', { volume: 0.6, loop: false });
 
-    const collectCoin = (coin) => {
+    function collectCoin(player, coin) {
       this.coinMusic.play();
       coin.disableBody(true, true);
     }
@@ -125,20 +154,27 @@ export default class GameScene extends Phaser.Scene {
 
     /* Coin Animation */
     this.anims.create({
-      key: 'shine',
+      key: 'shine1',
       frames: this.anims.generateFrameNames('cb', {start: 0, end: 7, zeroPad: 1, prefix: 'cb-', suffix: '.png'}),
       frameRate: 9, 
       repeat: -1
     })
     this.anims.create({
-      key: 'shine',
+      key: 'shine2',
       frames: this.anims.generateFrameNames('cg', {start: 0, end: 7, zeroPad: 1, prefix: 'cg-', suffix: '.png'}),
       frameRate: 9, 
       repeat: -1
     })
     this.anims.create({
-      key: 'shine',
+      key: 'shine3',
       frames: this.anims.generateFrameNames('co', {start: 0, end: 7, zeroPad: 1, prefix: 'co-', suffix: '.png'}),
+      frameRate: 9, 
+      repeat: -1
+    })
+    /* skeleton Animation */
+    this.anims.create({
+      key: 'attackske',
+      frames: this.anims.generateFrameNames('skeleton', {start: 0, end: 7, zeroPad: 1, prefix: 'Attack2-', suffix: '.png'}),
       frameRate: 9, 
       repeat: -1
     })
@@ -157,8 +193,15 @@ export default class GameScene extends Phaser.Scene {
       repeat: -1
     })
 
-
+    /* boss animations */
+    this.anims.create({
+      key: 'idleboss',
+      frames: this.anims.generateFrameNames('boss', {start: 0, end: 5, zeroPad: 1, prefix: 'demon-', suffix: '.png'}),
+      frameRate: 8, 
+      repeat: -1
+    })
     /* Hero animations */
+
     this.anims.create({
       key: 'idle',
       frames: this.anims.generateFrameNames('hero', {start: 0, end: 3, zeroPad: 2, prefix: 'adventurer-idle-2-', suffix: '.png'}),
@@ -259,15 +302,36 @@ export default class GameScene extends Phaser.Scene {
 
   update() {
 
+    this.boss.anims.play('idleboss',true)
+
     this.coinsb.children.iterate( child => {
 
      
       Align.scaleToGameW(child, 0.02)
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      
       child.body.offset.y = 10
-      child.anims.play('shine',true)
+      child.anims.play('shine1',true)
   
   });
+
+  this.coinsg.children.iterate( child => {
+
+     
+    Align.scaleToGameW(child, 0.02)
+    
+    child.body.offset.y = 10
+    child.anims.play('shine2',true)
+
+});
+this.coinso.children.iterate( child => {
+
+     
+  Align.scaleToGameW(child, 0.02)
+  
+  child.body.offset.y = 10
+  child.anims.play('shine3',true)
+
+});
     
     this.mushrooms1.children.iterate( child => {
       Align.scaleToGameW(child, 0.2)
@@ -302,6 +366,23 @@ export default class GameScene extends Phaser.Scene {
       child.body.offset.x = 60
       child.body.offset.y = 60
       child.anims.play('attackgoblin',true)
+      child.flipX=true
+    })
+    this.skeleton1.children.iterate( child => {
+      Align.scaleToGameW(child, 0.2)
+      child.body.setSize(25,40)
+      child.body.offset.x = 60
+      child.body.offset.y = 60
+      child.anims.play('attackske',true)
+      child.flipX=true
+    })
+
+    this.skeleton2.children.iterate( child => {
+      Align.scaleToGameW(child, 0.2)
+      child.body.setSize(25,40)
+      child.body.offset.x = 60
+      child.body.offset.y = 60
+      child.anims.play('attackske',true)
       child.flipX=true
     })
     

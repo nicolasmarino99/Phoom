@@ -12,6 +12,10 @@ import coimg from '../assets/level1/coins/co.png'
 import coJSON from '../assets/level1/coins/co.json';
 import goblinimg from '../assets/level1/enemies/Goblin/goblin.png'
 import goblinJSON from '../assets/level1/enemies/Goblin/goblin.json';
+import skeletonimg from '../assets/level1/enemies/Skeleton/skeleton.png'
+import skeletonJSON from '../assets/level1/enemies/Skeleton/skeleton.json';
+import bossimg from '../assets/level1/enemies/boss/boss.png'
+import bossJSON from '../assets/level1/enemies/boss/boss.json';
 
 
 
@@ -36,6 +40,8 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.atlas('cg',cgimg ,cgJSON)
     this.load.atlas('co',coimg ,coJSON)
     this.load.atlas('goblin',goblinimg ,goblinJSON)
+    this.load.atlas('skeleton',skeletonimg ,skeletonJSON)
+    this.load.atlas('boss',bossimg ,bossJSON)
     this.load.image('bg_1', './src/assets/level1/map/sky.png');
     this.load.image('bg_2', './src/assets/level1/map/sea.png');
     this.load.image('bg_3', './src/assets/level1/map/clouds.png');
