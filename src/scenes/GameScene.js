@@ -14,20 +14,20 @@ export default class GameScene extends Phaser.Scene {
 
   create () {
 
-    const rescaleY = -180
-    this.bg_1 = this.add.tileSprite(0,-500,this.game.config.width,this.game.config.height,'bg_1')
+    const rescaleY = -410
+    this.bg_1 = this.add.tileSprite(0,-100,this.game.config.width,this.game.config.height,'bg_1')
     this.bg_1.setOrigin(0)
-    this.bg_1.setScrollFactor(0,2)
-    Align.scaleToGameW(this.bg_1,3.5)
+    this.bg_1.setScrollFactor(0)
+    Align.scaleToGameW(this.bg_1,1.5)
 
     this.bg_2 = this.add.tileSprite(0,50-rescaleY,this.game.config.width,this.game.config.height,'bg_2')
     this.bg_2.setOrigin(0,0)
-    this.bg_2.setScrollFactor(0,2)
+    this.bg_2.setScrollFactor(0)
     Align.scaleToGameW(this.bg_2,2.5)
 
     this.bg_3 = this.add.tileSprite(0,-180-rescaleY,this.game.config.width,235,'bg_3')
     this.bg_3.setOrigin(0,0)
-    this.bg_3.setScrollFactor(0,2)
+    this.bg_3.setScrollFactor(0)
     
 
    
@@ -106,12 +106,12 @@ export default class GameScene extends Phaser.Scene {
     this.anims.create({
       key: 'attack2',
       frames: this.anims.generateFrameNames('hero', {start: 0, end: 5, zeroPad: 2, prefix: 'adventurer-attack2-', suffix: '.png'}),
-      frameRate: 8, 
+      frameRate: 18, 
     })
     this.anims.create({
       key: 'attack3',
       frames: this.anims.generateFrameNames('hero', {start: 0, end: 5, zeroPad: 2, prefix: 'adventurer-attack3-', suffix: '.png'}),
-      frameRate: 8, 
+      frameRate: 18, 
     })
     
     
@@ -173,14 +173,14 @@ export default class GameScene extends Phaser.Scene {
 
   update() {
     
-    this.bg_1.tilePositionX = this.camera.scrollX * 0.6
-    this.bg_2.tilePositionX = this.camera.scrollX * 1
-    this.bg_3.tilePositionX = this.camera.scrollX * 2
-    this.bg_1.tilePositionX = this.camera.scrollY * 0
-    this.bg_2.tilePositionX = this.camera.scrollY * 0
-    this.bg_3.tilePositionX = this.camera.scrollY * 0
+    this.bg_1.tilePositionX +=  0.6
+    this.bg_2.tilePositionX +=  2
+    this.bg_3.tilePositionX +=  0.5
     
-    
+    this.cursors.up.on('down',()=>{
+      this.hero.setVelocityY(-200)
+      this.hero.anims.play("jump1",true)
+    },this)
     //this.hero.anims.play("idle",true)
     //this.keys.A.on('down', () => {
     //  console.log('asdfasd')
@@ -188,20 +188,15 @@ export default class GameScene extends Phaser.Scene {
     //  
     //})
     
-    if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-      const animComplete = (animation, frame) =>
-      {this.hero.play('attack1',true);
-      //  Animation is over, let's fade the sprite out
-      this.tweens.add({
-          targets: this.hero,
-          duration: 3000,
-          alpha: 0
-      });
-  }
-
+    if (this.keys.Z.isDown) {
+      
+      this.hero.play('attack1',true);
+      
+    }else if (this.keys.X.isDown ) {
     //  Animation will repeat twice and then emit the event
-    this.hero.on('animationcomplete', animComplete, this);
-
+    this.hero.play('attack2',true);
+  }else if (this.keys.A.isDown  ) {
+    this.hero.play('attack3',true);
     
       
     
@@ -249,7 +244,7 @@ export default class GameScene extends Phaser.Scene {
         
     }
     if (this.cursors.up.isDown ) {
-        this.hero.setVelocityY(-400)
+        
         this.hero.anims.play("jump1",true)
         
     }
