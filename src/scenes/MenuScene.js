@@ -35,7 +35,7 @@ export default class MenuScene extends Phaser.Scene {
     this.input.setDefaultCursor('url(./src/assets/ui/cursor/cursor1.png), pointer')
 
     this.bgMusic = this.sound.add('menuMusic', { volume: 0.2, loop: true });
-    window.music = this.bgMusic
+    
     this.bgMusic.play();
 
 

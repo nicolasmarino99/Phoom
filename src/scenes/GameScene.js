@@ -14,6 +14,9 @@ export default class GameScene extends Phaser.Scene {
 
   create () {
 
+    this.gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
+    this.gameMusic.play();
+
     const rescaleY = -410
     this.bg_1 = this.add.tileSprite(0,-100,this.game.config.width,this.game.config.height,'bg_1')
     this.bg_1.setOrigin(0)
@@ -42,32 +45,115 @@ export default class GameScene extends Phaser.Scene {
     
     layerPlatforms.setCollisionByProperty({collides: true})
     
-    const debugGraphics = this.add.graphics().setAlpha(0.7) 
-    layerPlatforms.renderDebug(debugGraphics, {
-      tileColor: null,
-      collidingTileColor: new Phaser.Display.Color(243,234,48,255),
-      faceColor: new Phaser.Display.Color(40,39,37,255)
-    })
+    //const debugGraphics = this.add.graphics().setAlpha(0.7) 
+    //layerPlatforms.renderDebug(debugGraphics, {
+    //  tileColor: null,
+    //  collidingTileColor: new Phaser.Display.Color(243,234,48,255),
+    //  faceColor: new Phaser.Display.Color(40,39,37,255)
+    //})
 
 
     this.hero = this.physics.add.sprite(200,310,'hero').setBounce(0.3)
-    this.mushroom = this.physics.add.sprite(400,230,'mushroom').setBounce(0.3)
-    //this.hero.setCollideWorldBounds(true)
+    
+    this.mushrooms1 = this.physics.add.group({
+      key: 'mushroom',
+      repeat: 2,
+      setXY: { x: 400, y: 230, stepX: 160 }
+    })
+    this.mushrooms2 = this.physics.add.group({
+      key: 'mushroom',
+      repeat: 2,
+      setXY: { x: 1900, y: 230, stepX: 160 }
+    })
+    this.goblin1 = this.physics.add.group({
+      key: 'goblin',
+      repeat: 2,
+      setXY: { x: 3400, y: 0, stepX: 160 }
+    })
+    this.goblin2 = this.physics.add.group({
+      key: 'goblin',
+      repeat: 4,
+      setXY: { x: 4000, y: 230, stepX: 160 }
+    })
+    this.coinsb = this.physics.add.group({
+      key: 'cb',
+      repeat: 11*5,
+      setXY: { x: 19, y: 0, stepX: 70 }
+    })
+    
 
+    
+    //Colliders
+    this.physics.add.collider(this.coinsb, layerPlatforms);
     this.physics.add.collider(this.hero,layerPlatforms)
-    this.physics.add.collider(this.mushroom,layerPlatforms)
+    this.physics.add.collider(this.mushrooms1,layerPlatforms)
+    this.physics.add.collider(this.mushrooms2,layerPlatforms)
+    this.physics.add.collider(this.mushrooms1,this.hero)
+    this.physics.add.collider(this.mushrooms2,this.hero)
+    this.physics.add.collider(this.goblin1,layerPlatforms)
+    this.physics.add.collider(this.goblin2,layerPlatforms)
+    this.physics.add.collider(this.goblin1,this.hero)
+    this.physics.add.collider(this.goblin2,this.hero)
     
     Align.scaleToGameW(this.hero, 0.08)
-    Align.scaleToGameW(this.mushroom, 0.2)
+    Align.scaleToGameW(this.coinsb, 2)
 
-    let frameNames = this.textures.get('mushroom').getFrameNames()
-    console.log(frameNames)
+    //Adjust camara settings and collider hero size
+    this.camera = this.cameras.main;
+    this.camera.startFollow(this.hero);
+    this.hero.body.setSize(this.hero.width*0.5,this.hero.height*0.8)
+    this.hero.body.offset.x = 10
+    this.hero.body.offset.y = 6
+   
+    this.camera.setFollowOffset(-300, 165);
 
+    //let frameNames = this.textures.get('mushroom').getFrameNames()
+    //console.log(frameNames)
+
+    this.physics.add.overlap(this.hero, this.coinsb, collectCoin, null, this);
+    
+    
+
+
+    this.coinMusic = this.sound.add('coinMusic', { volume: 0.6, loop: false });
+
+    const collectCoin = (coin) => {
+      this.coinMusic.play();
+      coin.disableBody(true, true);
+    }
+
+
+    /* Coin Animation */
+    this.anims.create({
+      key: 'shine',
+      frames: this.anims.generateFrameNames('cb', {start: 0, end: 7, zeroPad: 1, prefix: 'cb-', suffix: '.png'}),
+      frameRate: 9, 
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'shine',
+      frames: this.anims.generateFrameNames('cg', {start: 0, end: 7, zeroPad: 1, prefix: 'cg-', suffix: '.png'}),
+      frameRate: 9, 
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'shine',
+      frames: this.anims.generateFrameNames('co', {start: 0, end: 7, zeroPad: 1, prefix: 'co-', suffix: '.png'}),
+      frameRate: 9, 
+      repeat: -1
+    })
+    /* goblin Animation */
+    this.anims.create({
+      key: 'attackgoblin',
+      frames: this.anims.generateFrameNames('goblin', {start: 0, end: 7, zeroPad: 1, prefix: 'Attack2-', suffix: '.png'}),
+      frameRate: 9, 
+      repeat: -1
+    })
     /* Mushroom animations */
     this.anims.create({
       key: 'attack',
       frames: this.anims.generateFrameNames('mushroom', {start: 0, end: 3, zeroPad: 1, prefix: 'Attack2-', suffix: '.png'}),
-      frameRate: 9, 
+      frameRate: 7, 
       repeat: -1
     })
 
@@ -152,15 +238,7 @@ export default class GameScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     
-    this.camera = this.cameras.main;
-    this.camera.startFollow(this.hero);
-    this.hero.body.setSize(this.hero.width*0.5,this.hero.height*0.8)
-    this.hero.body.offset.x = 10
-    this.hero.body.offset.y = 6
-    this.mushroom.body.setSize(50,60)
-    this.mushroom.body.offset.x = 50
-    this.mushroom.body.offset.y = 40
-    this.camera.setFollowOffset(-300, 165);
+    
     
     
     
@@ -180,7 +258,55 @@ export default class GameScene extends Phaser.Scene {
 
 
   update() {
-    this.mushroom.anims.play('attack',true)
+
+    this.coinsb.children.iterate( child => {
+
+     
+      Align.scaleToGameW(child, 0.02)
+      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      child.body.offset.y = 10
+      child.anims.play('shine',true)
+  
+  });
+    
+    this.mushrooms1.children.iterate( child => {
+      Align.scaleToGameW(child, 0.2)
+      child.body.setSize(25,40)
+      child.body.offset.x = 60
+      child.body.offset.y = 60
+      child.anims.play('attack',true)
+      child.flipX=true
+      
+    })
+    this.mushrooms2.children.iterate( child => {
+      Align.scaleToGameW(child, 0.2)
+      child.body.setSize(25,40)
+      child.body.offset.x = 60
+      child.body.offset.y = 60
+      child.anims.play('attack',true)
+      child.flipX=true
+    })
+
+    this.goblin1.children.iterate( child => {
+      Align.scaleToGameW(child, 0.2)
+      child.body.setSize(25,40)
+      child.body.offset.x = 60
+      child.body.offset.y = 60
+      child.anims.play('attackgoblin',true)
+      child.flipX=true
+    })
+
+    this.goblin2.children.iterate( child => {
+      Align.scaleToGameW(child, 0.2)
+      child.body.setSize(25,40)
+      child.body.offset.x = 60
+      child.body.offset.y = 60
+      child.anims.play('attackgoblin',true)
+      child.flipX=true
+    })
+    
+
+
     this.bg_1.tilePositionX +=  0.6
     this.bg_2.tilePositionX +=  2
     this.bg_3.tilePositionX +=  0.5
@@ -232,9 +358,15 @@ export default class GameScene extends Phaser.Scene {
           
       } else if(this.cursors.down.isDown) {
           this.hero.anims.play("slide",true) 
+          this.hero.body.setSize(this.hero.width*0.5,this.hero.height*0.5)
+          this.hero.body.offset.y = 16
+          this.hero.body.offset.x = 10
 
       } else {
           this.hero.anims.play("run",true)
+          this.hero.body.setSize(this.hero.width*0.5,this.hero.height*0.8)
+          this.hero.body.offset.x = 10
+          this.hero.body.offset.y = 6
       }
       
     }
@@ -251,5 +383,10 @@ export default class GameScene extends Phaser.Scene {
         
     }
 
+    if (this.cursors.down.isDown ) {
+        
+      this.hero.anims.play("down",true)
+      
+  }
   }
 };
