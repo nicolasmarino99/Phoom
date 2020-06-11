@@ -3,11 +3,13 @@ import {Align} from "../util/align";
 import {blueCoinAnims } from "../scenes/anims/coinsAnims/blueCoinAnims";
 import {greenCoinAnims} from "../scenes/anims/coinsAnims/greenCoinAnims";
 import {orangeCoinAnims} from "../scenes/anims/coinsAnims/orangeCoinAnims";
-import {goblinAnims} from "../scenes/anims/enemiesAnims/goblinAnims";
+
 import {skeletonAnims} from "../scenes/anims/enemiesAnims/skeletonAnims";
 import {heroAnims} from "../scenes/anims/herosAnims/heroAnims";
 import Boss from './charaters/enemies/Boss' 
 import Mushroom from './charaters/enemies/Mushroom'
+import Goblin from './charaters/enemies/Goblin'
+import Skeleton from './charaters/enemies/Skeleton'
 import { adjustBodies } from "./charaters/settingsCharBodies"; 
 import { addCoinsToScenario } from "./items/coins/coinsIter"; 
 
@@ -61,41 +63,29 @@ export default class GameScene extends Phaser.Scene {
     this.hero = this.physics.add.sprite(200,310,'hero').setBounce(0.3)
     
 
-    const boss = this.physics.add.group({
+    this.boss = this.physics.add.group({
       classType: Boss,
     })
-    boss.get(7000,100,'boss').body.setSize(boss.width,boss.height)
-    
+    this.boss.get(7000,100,'boss')
     
 
-    //this.mushrooms1 = this.physics.add.group({
-    //  key: 'mushroom',
-    //  repeat: 2,
-    //  setXY: { x: 400, y: 230, stepX: 160 }
-    //})
-    this.mushrooms1 = this.physics.add.group({
+    this.mushroom = this.physics.add.group({
       classType: Mushroom,
-      repeat: 2,
-      setXY: { x: 100, y: 230, stepX: 160 }
     })
-    this.mushrooms1.get(500,100,'mushrooms')
+    this.mushroom.get(500,100,'mushroom')
     
+    this.goblin = this.physics.add.group({
+      classType: Goblin,
+    })
+    this.goblin.get(600,100,'goblin')
 
-    this.mushrooms2 = this.physics.add.group({
-      key: 'mushroom',
-      repeat: 2,
-      setXY: { x: 1900, y: 230, stepX: 160 }
+    this.skeleton = this.physics.add.group({
+      classType: Skeleton,
     })
-    this.goblin1 = this.physics.add.group({
-      key: 'goblin',
-      repeat: 2,
-      setXY: { x: 3400, y: 0, stepX: 160 }
-    })
-    this.goblin2 = this.physics.add.group({
-      key: 'goblin',
-      repeat: 4,
-      setXY: { x: 4000, y: 230, stepX: 160 }
-    })
+    this.skeleton.get(600,100,'skeleton')
+   
+    
+    
     this.skeleton1 = this.physics.add.group({
       key: 'skeleton',
       repeat: 2,
@@ -110,38 +100,35 @@ export default class GameScene extends Phaser.Scene {
     addCoinsToScenario(this)
 
     Align.scaleToGameW(this.hero, 0.08)
-    Align.scaleToGameW(boss, 0.18)
-    Align.scaleToGameW(this.coinsb, 2)
+    Align.scaleToGameW(this.boss, 0.18)
+    
     
     //Colliders
 
     this.physics.add.collider(this.coinsb, layerPlatforms);
     this.physics.add.collider(this.coinsg, layerPlatforms);
     this.physics.add.collider(this.coinso, layerPlatforms);
+
     this.physics.add.collider(this.hero,layerPlatforms)
-    this.physics.add.collider(boss,layerPlatforms)
-    this.physics.add.collider(boss,this.hero)
-    this.physics.add.collider(this.mushrooms1,layerPlatforms)
-    this.physics.add.collider(this.mushrooms2,layerPlatforms)
-    this.physics.add.collider(this.mushrooms1,this.hero)
-    this.physics.add.collider(this.mushrooms2,this.hero)
-    this.physics.add.collider(this.goblin1,layerPlatforms)
-    this.physics.add.collider(this.goblin2,layerPlatforms)
-    this.physics.add.collider(this.goblin1,this.hero)
-    this.physics.add.collider(this.goblin2,this.hero)
-    this.physics.add.collider(this.skeleton1,layerPlatforms)
-    this.physics.add.collider(this.skeleton2,layerPlatforms)
-    this.physics.add.collider(this.skeleton1,this.hero)
-    this.physics.add.collider(this.skeleton2,this.hero)
+
+    this.physics.add.collider(this.boss,layerPlatforms)
+    this.physics.add.collider(this.boss,this.hero)
+  
+    this.physics.add.collider(this.mushroom,layerPlatforms)
+    this.physics.add.collider(this.mushroom,this.hero)
+    
+    this.physics.add.collider(this.goblin,layerPlatforms)
+    this.physics.add.collider(this.goblin,this.hero)
+    
+    this.physics.add.collider(this.skeleton,layerPlatforms)
+    this.physics.add.collider(this.skeleton,this.hero)
     
     
     //Adjust camara settings and collider hero size
 
     this.camera = this.cameras.main;
     this.camera.startFollow(this.hero);
-    this.hero.body.setSize(this.hero.width*0.5,this.hero.height*0.8)
-    this.hero.body.offset.x = 10
-    this.hero.body.offset.y = 6
+    
     this.camera.setFollowOffset(-300, 165);
 
   
@@ -160,8 +147,7 @@ export default class GameScene extends Phaser.Scene {
     greenCoinAnims(this)
     orangeCoinAnims(this)
     skeletonAnims(this)
-    goblinAnims(this)
-    //mushroomAnims(this)
+    
     heroAnims(this)
     
 

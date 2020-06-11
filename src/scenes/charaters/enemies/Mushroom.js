@@ -7,7 +7,7 @@ export default class Mushroom extends Phaser.Physics.Arcade.Sprite {
         super(scene,x,y,texture,frame)
         
             mushroomAnims(scene)
-            Align.scaleToGameW(this, 0.04)
+            Align.scaleToGameW(this, 0.2)
             //this.anims.play('idleboss',true)
             this.anims.play('attack',true)
             this.flipX=true
