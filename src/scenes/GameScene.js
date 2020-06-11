@@ -163,16 +163,11 @@ export default class GameScene extends Phaser.Scene {
 
     this.keys = this.input.keyboard.addKeys('Z,X,A,S')
     this.cursors = this.input.keyboard.createCursorKeys();
-
-    
-
-    
-  
   }
 
 
 
-  update() {
+  update(x,dx) {
 
     this.boss.anims.play('idleboss',true)
 
