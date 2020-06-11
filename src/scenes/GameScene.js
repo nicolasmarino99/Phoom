@@ -1,5 +1,13 @@
 import 'phaser';
 import {Align} from "../util/align";
+import {blueCoinAnims } from "../scenes/anims/coinsAnims/blueCoinAnims";
+import {greenCoinAnims} from "../scenes/anims/coinsAnims/greenCoinAnims";
+import {orangeCoinAnims} from "../scenes/anims/coinsAnims/orangeCoinAnims";
+import {bossAnims} from "../scenes/anims/enemiesAnims/bossAnims";
+import {goblinAnims} from "../scenes/anims/enemiesAnims/goblinAnims";
+import {mushroomAnims} from "../scenes/anims/enemiesAnims/mushroomAnims";
+import {skeletonAnims} from "../scenes/anims/enemiesAnims/skeletonAnims";
+import {heroAnims} from "../scenes/anims/herosAnims/heroAnims";
 
 export default class GameScene extends Phaser.Scene {
   constructor () {
@@ -8,7 +16,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload () {
-    // load images
     
   }
 
@@ -16,6 +23,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
     this.gameMusic.play();
+
+    /* Add Paralax background */
 
     const rescaleY = -410
     this.bg_1 = this.add.tileSprite(0,-100,this.game.config.width,this.game.config.height,'bg_1')
@@ -32,17 +41,12 @@ export default class GameScene extends Phaser.Scene {
     this.bg_3.setOrigin(0,0)
     this.bg_3.setScrollFactor(0)
     
-
-   
-    
-
-
     const map = this.make.tilemap({ key: 'level1JSON'})
     const tileset = map.addTilesetImage('sea','tiles')
     const layerPlatforms = map.createStaticLayer('level1Map', tileset)
     
     Align.scaleToGameW(layerPlatforms,4.9)
-    
+
     layerPlatforms.setCollisionByProperty({collides: true})
     
     //const debugGraphics = this.add.graphics().setAlpha(0.7) 
@@ -51,7 +55,6 @@ export default class GameScene extends Phaser.Scene {
     //  collidingTileColor: new Phaser.Display.Color(243,234,48,255),
     //  faceColor: new Phaser.Display.Color(40,39,37,255)
     //})
-
 
     this.hero = this.physics.add.sprite(200,310,'hero').setBounce(0.3)
     this.boss = this.physics.add.sprite(6700,210,'boss')
@@ -101,8 +104,12 @@ export default class GameScene extends Phaser.Scene {
       setXY: { x: 5500, y: 0, stepX: 70 }
     })
 
+    Align.scaleToGameW(this.hero, 0.08)
+    Align.scaleToGameW(this.boss, 0.18)
+    Align.scaleToGameW(this.coinsb, 2)
     
     //Colliders
+
     this.physics.add.collider(this.coinsb, layerPlatforms);
     this.physics.add.collider(this.coinsg, layerPlatforms);
     this.physics.add.collider(this.coinso, layerPlatforms);
@@ -122,177 +129,42 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.skeleton1,this.hero)
     this.physics.add.collider(this.skeleton2,this.hero)
     
-    Align.scaleToGameW(this.hero, 0.08)
-    Align.scaleToGameW(this.boss, 0.18)
-    Align.scaleToGameW(this.coinsb, 2)
-
+    
     //Adjust camara settings and collider hero size
+
     this.camera = this.cameras.main;
     this.camera.startFollow(this.hero);
     this.hero.body.setSize(this.hero.width*0.5,this.hero.height*0.8)
     this.hero.body.offset.x = 10
     this.hero.body.offset.y = 6
-   
     this.camera.setFollowOffset(-300, 165);
 
-    //let frameNames = this.textures.get('mushroom').getFrameNames()
-    //console.log(frameNames)
-
-    this.physics.add.overlap(this.hero, this.coinsb, collectCoin, null, this);
-    this.physics.add.overlap(this.hero, this.coinsg, collectCoin, null, this);
-    this.physics.add.overlap(this.hero, this.coinso, collectCoin, null, this);
-    
-
-
+  
     this.coinMusic = this.sound.add('coinMusic', { volume: 0.6, loop: false });
 
     function collectCoin(player, coin) {
       this.coinMusic.play();
       coin.disableBody(true, true);
     }
-
-
-    /* Coin Animation */
-    this.anims.create({
-      key: 'shine1',
-      frames: this.anims.generateFrameNames('cb', {start: 0, end: 7, zeroPad: 1, prefix: 'cb-', suffix: '.png'}),
-      frameRate: 9, 
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'shine2',
-      frames: this.anims.generateFrameNames('cg', {start: 0, end: 7, zeroPad: 1, prefix: 'cg-', suffix: '.png'}),
-      frameRate: 9, 
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'shine3',
-      frames: this.anims.generateFrameNames('co', {start: 0, end: 7, zeroPad: 1, prefix: 'co-', suffix: '.png'}),
-      frameRate: 9, 
-      repeat: -1
-    })
-    /* skeleton Animation */
-    this.anims.create({
-      key: 'attackske',
-      frames: this.anims.generateFrameNames('skeleton', {start: 0, end: 7, zeroPad: 1, prefix: 'Attack2-', suffix: '.png'}),
-      frameRate: 9, 
-      repeat: -1
-    })
-    /* goblin Animation */
-    this.anims.create({
-      key: 'attackgoblin',
-      frames: this.anims.generateFrameNames('goblin', {start: 0, end: 7, zeroPad: 1, prefix: 'Attack2-', suffix: '.png'}),
-      frameRate: 9, 
-      repeat: -1
-    })
-    /* Mushroom animations */
-    this.anims.create({
-      key: 'attack',
-      frames: this.anims.generateFrameNames('mushroom', {start: 0, end: 3, zeroPad: 1, prefix: 'Attack2-', suffix: '.png'}),
-      frameRate: 7, 
-      repeat: -1
-    })
-
-    /* boss animations */
-    this.anims.create({
-      key: 'idleboss',
-      frames: this.anims.generateFrameNames('boss', {start: 0, end: 5, zeroPad: 1, prefix: 'demon-', suffix: '.png'}),
-      frameRate: 8, 
-      repeat: -1
-    })
-    /* Hero animations */
-
-    this.anims.create({
-      key: 'idle',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 3, zeroPad: 2, prefix: 'adventurer-idle-2-', suffix: '.png'}),
-      frameRate: 8, 
-      repeat: -1
-    })
-    
-    this.anims.create({
-      key: 'runSlow',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 5, zeroPad: 2, prefix: 'adventurer-run-', suffix: '.png'}),
-      frameRate: 13, 
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'run',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 5, zeroPad: 2, prefix: 'adventurer-run3-', suffix: '.png'}),
-      frameRate: 13, 
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'jump1',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 3, zeroPad: 2, prefix: 'adventurer-jump-', suffix: '.png'}),
-      frameRate: 13, 
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'jump2',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 2, zeroPad: 2, prefix: 'adventurer-crnr-jmp-', suffix: '.png'}),
-      frameRate: 13, 
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'jump3',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 3, zeroPad: 1, prefix: 'adventurer-smrslt-', suffix: '.png'}),
-      frameRate: 13, 
-      repeat: -1
-    })
-    this.anims.create({
-      key: 'attack1',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 4, zeroPad: 2, prefix: 'adventurer-attack1-', suffix: '.png'}),
-      frameRate: 18, 
-      repeat: 1
-    })
-    this.anims.create({
-      key: 'attack2',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 5, zeroPad: 2, prefix: 'adventurer-attack2-', suffix: '.png'}),
-      frameRate: 18, 
-    })
-    this.anims.create({
-      key: 'attack3',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 5, zeroPad: 2, prefix: 'adventurer-attack3-', suffix: '.png'}),
-      frameRate: 18, 
-    })
+    this.physics.add.overlap(this.hero, this.coinsb, collectCoin, null, this);
+    this.physics.add.overlap(this.hero, this.coinsg, collectCoin, null, this);
+    this.physics.add.overlap(this.hero, this.coinso, collectCoin, null, this);
     
     
-    
-    this.anims.create({
-      key: 'slide',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 1, zeroPad: 2, prefix: 'adventurer-slide-', suffix: '.png'}),
-      frameRate: 8, 
-    })
-    this.anims.create({
-      key: 'stand',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 2, zeroPad: 2, prefix: 'adventurer-stand-', suffix: '.png'}),
-      frameRate: 8, 
-    })
-    this.anims.create({
-      key: 'down',
-      frames: this.anims.generateFrameNames('hero', {start: 0, end: 3, zeroPad: 2, prefix: 'adventurer-crouch-', suffix: '.png'}),
-      frameRate: 8, 
-  })
-
+    blueCoinAnims(this)
+    greenCoinAnims(this)
+    orangeCoinAnims(this)
+    skeletonAnims(this)
+    goblinAnims(this)
+    mushroomAnims(this)
+    bossAnims(this)
+    heroAnims(this)
     
 
-    
     this.keys = this.input.keyboard.addKeys('Z,X,A,S')
     this.cursors = this.input.keyboard.createCursorKeys();
 
     
-    
-    
-    
-    
-    this.keyCombo = this.input.keyboard.createCombo([this.keys.Z,this.keys.Z,this.keys.Z], {
-      resetOnWrongKey: true,
-      maxKeyDelay: 0,
-      resetOnMatch: false,
-      deleteOnMatch: false,
-
-
-    });
 
     
   
