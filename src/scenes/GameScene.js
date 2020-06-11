@@ -3,11 +3,13 @@ import {Align} from "../util/align";
 import {blueCoinAnims } from "../scenes/anims/coinsAnims/blueCoinAnims";
 import {greenCoinAnims} from "../scenes/anims/coinsAnims/greenCoinAnims";
 import {orangeCoinAnims} from "../scenes/anims/coinsAnims/orangeCoinAnims";
-import {bossAnims} from "../scenes/anims/enemiesAnims/bossAnims";
 import {goblinAnims} from "../scenes/anims/enemiesAnims/goblinAnims";
-import {mushroomAnims} from "../scenes/anims/enemiesAnims/mushroomAnims";
 import {skeletonAnims} from "../scenes/anims/enemiesAnims/skeletonAnims";
 import {heroAnims} from "../scenes/anims/herosAnims/heroAnims";
+import Boss from './charaters/enemies/Boss' 
+import Mushroom from './charaters/enemies/Mushroom'
+import { adjustBodies } from "./charaters/settingsCharBodies"; 
+import { addCoinsToScenario } from "./items/coins/coinsIter"; 
 
 export default class GameScene extends Phaser.Scene {
   constructor () {
@@ -57,12 +59,28 @@ export default class GameScene extends Phaser.Scene {
     //})
 
     this.hero = this.physics.add.sprite(200,310,'hero').setBounce(0.3)
-    this.boss = this.physics.add.sprite(6700,210,'boss')
-    this.mushrooms1 = this.physics.add.group({
-      key: 'mushroom',
-      repeat: 2,
-      setXY: { x: 400, y: 230, stepX: 160 }
+    
+
+    const boss = this.physics.add.group({
+      classType: Boss,
     })
+    boss.get(7000,100,'boss').body.setSize(boss.width,boss.height)
+    
+    
+
+    //this.mushrooms1 = this.physics.add.group({
+    //  key: 'mushroom',
+    //  repeat: 2,
+    //  setXY: { x: 400, y: 230, stepX: 160 }
+    //})
+    this.mushrooms1 = this.physics.add.group({
+      classType: Mushroom,
+      repeat: 2,
+      setXY: { x: 100, y: 230, stepX: 160 }
+    })
+    this.mushrooms1.get(500,100,'mushrooms')
+    
+
     this.mushrooms2 = this.physics.add.group({
       key: 'mushroom',
       repeat: 2,
@@ -88,24 +106,11 @@ export default class GameScene extends Phaser.Scene {
       repeat: 1,
       setXY: { x: 6000, y: 230, stepX: 160 }
     })
-    this.coinsb = this.physics.add.group({
-      key: 'cb',
-      repeat: 11*5,
-      setXY: { x: 19, y: 0, stepX: 70 }
-    })
-    this.coinsg = this.physics.add.group({
-      key: 'cg',
-      repeat: 11*3,
-      setXY: { x: 4100, y: 0, stepX: 70 }
-    })
-    this.coinso = this.physics.add.group({
-      key: 'co',
-      repeat: 11,
-      setXY: { x: 5500, y: 0, stepX: 70 }
-    })
+    
+    addCoinsToScenario(this)
 
     Align.scaleToGameW(this.hero, 0.08)
-    Align.scaleToGameW(this.boss, 0.18)
+    Align.scaleToGameW(boss, 0.18)
     Align.scaleToGameW(this.coinsb, 2)
     
     //Colliders
@@ -114,8 +119,8 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.coinsg, layerPlatforms);
     this.physics.add.collider(this.coinso, layerPlatforms);
     this.physics.add.collider(this.hero,layerPlatforms)
-    this.physics.add.collider(this.boss,layerPlatforms)
-    this.physics.add.collider(this.boss,this.hero)
+    this.physics.add.collider(boss,layerPlatforms)
+    this.physics.add.collider(boss,this.hero)
     this.physics.add.collider(this.mushrooms1,layerPlatforms)
     this.physics.add.collider(this.mushrooms2,layerPlatforms)
     this.physics.add.collider(this.mushrooms1,this.hero)
@@ -156,8 +161,7 @@ export default class GameScene extends Phaser.Scene {
     orangeCoinAnims(this)
     skeletonAnims(this)
     goblinAnims(this)
-    mushroomAnims(this)
-    bossAnims(this)
+    //mushroomAnims(this)
     heroAnims(this)
     
 
@@ -168,91 +172,10 @@ export default class GameScene extends Phaser.Scene {
 
 
   update(x,dx) {
-
-    this.boss.anims.play('idleboss',true)
-
-    this.coinsb.children.iterate( child => {
-
-     
-      Align.scaleToGameW(child, 0.02)
-      
-      child.body.offset.y = 10
-      child.anims.play('shine1',true)
-  
-  });
-
-  this.coinsg.children.iterate( child => {
-
-     
-    Align.scaleToGameW(child, 0.02)
     
-    child.body.offset.y = 10
-    child.anims.play('shine2',true)
-
-});
-this.coinso.children.iterate( child => {
-
-     
-  Align.scaleToGameW(child, 0.02)
-  
-  child.body.offset.y = 10
-  child.anims.play('shine3',true)
-
-});
     
-    this.mushrooms1.children.iterate( child => {
-      Align.scaleToGameW(child, 0.2)
-      child.body.setSize(25,40)
-      child.body.offset.x = 60
-      child.body.offset.y = 60
-      child.anims.play('attack',true)
-      child.flipX=true
-      
-    })
-    this.mushrooms2.children.iterate( child => {
-      Align.scaleToGameW(child, 0.2)
-      child.body.setSize(25,40)
-      child.body.offset.x = 60
-      child.body.offset.y = 60
-      child.anims.play('attack',true)
-      child.flipX=true
-    })
-
-    this.goblin1.children.iterate( child => {
-      Align.scaleToGameW(child, 0.2)
-      child.body.setSize(25,40)
-      child.body.offset.x = 60
-      child.body.offset.y = 60
-      child.anims.play('attackgoblin',true)
-      child.flipX=true
-    })
-
-    this.goblin2.children.iterate( child => {
-      Align.scaleToGameW(child, 0.2)
-      child.body.setSize(25,40)
-      child.body.offset.x = 60
-      child.body.offset.y = 60
-      child.anims.play('attackgoblin',true)
-      child.flipX=true
-    })
-    this.skeleton1.children.iterate( child => {
-      Align.scaleToGameW(child, 0.2)
-      child.body.setSize(25,40)
-      child.body.offset.x = 60
-      child.body.offset.y = 60
-      child.anims.play('attackske',true)
-      child.flipX=true
-    })
-
-    this.skeleton2.children.iterate( child => {
-      Align.scaleToGameW(child, 0.2)
-      child.body.setSize(25,40)
-      child.body.offset.x = 60
-      child.body.offset.y = 60
-      child.anims.play('attackske',true)
-      child.flipX=true
-    })
     
+    adjustBodies(this)
 
 
     this.bg_1.tilePositionX +=  0.6
