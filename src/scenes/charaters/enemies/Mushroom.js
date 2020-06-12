@@ -17,6 +17,15 @@ export default class Mushroom extends Phaser.Physics.Arcade.Sprite {
         mushroomAnims(scene)
         Align.scaleToGameW(this, 0.2)
         this.anims.play('attack',true)
+        this.moveRandom = scene.time.addEvent({
+            delay: 5000,
+            callback: () => {
+                var value = Phaser.Math.Between(0,1);
+                this.direction = value
+                console.log(value)
+            },
+            loop: true
+        })
         const handleCollision = (go = Phaser.GameObjects.GameObject,tile = Phaser.Tilemaps.Tile) => {
         
             if ( go !== this) {
@@ -34,7 +43,7 @@ export default class Mushroom extends Phaser.Physics.Arcade.Sprite {
     preUpdate(t,dt) {
         super.preUpdate(t,dt)
 
-        const speed = 500
+        const speed = 10
 
         switch (this.direction) {
             case directions.RIGHT:

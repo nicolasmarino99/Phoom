@@ -71,9 +71,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.mushroom = this.physics.add.group({
       classType: Mushroom,
-      createCallback: (go) => {
-        go.body.onCollide = true
-      }
+
     })
     this.mushroom.get(500,100,'mushroom')
     
