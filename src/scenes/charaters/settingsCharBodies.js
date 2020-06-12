@@ -31,6 +31,7 @@ export const adjustBodies = (scenario) => {
     child.body.setSize(25,40)
     child.body.offset.x = 60
     child.body.offset.y = 60
+    child.body.onCollide = true
   })
       
   scenario.goblin.children.iterate( child => {

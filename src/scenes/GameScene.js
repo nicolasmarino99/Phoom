@@ -4,7 +4,7 @@ import {blueCoinAnims } from "../scenes/anims/coinsAnims/blueCoinAnims";
 import {greenCoinAnims} from "../scenes/anims/coinsAnims/greenCoinAnims";
 import {orangeCoinAnims} from "../scenes/anims/coinsAnims/orangeCoinAnims";
 
-import {skeletonAnims} from "../scenes/anims/enemiesAnims/skeletonAnims";
+
 import {heroAnims} from "../scenes/anims/herosAnims/heroAnims";
 import Boss from './charaters/enemies/Boss' 
 import Mushroom from './charaters/enemies/Mushroom'
@@ -71,6 +71,9 @@ export default class GameScene extends Phaser.Scene {
 
     this.mushroom = this.physics.add.group({
       classType: Mushroom,
+      createCallback: (go) => {
+        go.body.onCollide = true
+      }
     })
     this.mushroom.get(500,100,'mushroom')
     
@@ -146,7 +149,7 @@ export default class GameScene extends Phaser.Scene {
     blueCoinAnims(this)
     greenCoinAnims(this)
     orangeCoinAnims(this)
-    skeletonAnims(this)
+    
     
     heroAnims(this)
     
