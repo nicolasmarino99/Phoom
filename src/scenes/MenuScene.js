@@ -1,6 +1,8 @@
 import 'phaser';
 import {AlignGrid} from "../util/alignGrid";
 import {Align} from "../util/align";
+import Button from "./ui/Button";
+
 
 
 export default class MenuScene extends Phaser.Scene {
@@ -26,7 +28,8 @@ export default class MenuScene extends Phaser.Scene {
     this.load.audio('menuMusic', ['./src/assets/music/menu/menuMusic.ogg']);
     this.load.image('blueButton1', './src/assets/ui/buttons/PNG/shiny/7.png');
     this.load.image('blueButton2', './src/assets/ui/buttons/PNG/shiny/7shiny.png');
-
+    this.load.image('soundOn', './src/assets/ui/buttons/sound/soundOn.png')
+    this.load.image('soundOff', './src/assets/ui/buttons/sound/soundOff.png')
   }
   
   create () {
@@ -37,30 +40,32 @@ export default class MenuScene extends Phaser.Scene {
     this.bgMusic = this.sound.add('menuMusic', { volume: 0.2, loop: true });
     
     this.bgMusic.play();
+   
+    
 
-
-    this.gameButton = this.add.sprite(0, 0, 'blueButton1').setInteractive();
-    Align.scaleToGameW(this.gameButton ,0.2)
-    agrid.placeAtIndex(162,this.gameButton)
-    this.gameButton.depth=100
+    
  
     this.gameText = this.add.text(0, 0, 'Play', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '40px', fill: '#fff' });
     agrid.placeAtIndex(161,this.gameText.setOrigin(-0.3,0.5))
     this.gameText.depth=101
     
     
-    this.gameButton.on('pointerdown', pointer =>  {
+   
+    this.gameButton = new Button(this, 0, 0, 'blueButton1', 'blueButton2', () => {
       this.scene.start('Boot');
       this.bgMusic.stop();
-    });
+    }).setScale(.5,.4);
+    agrid.placeAtIndex(162,this.gameButton)
+    this.gameButton.depth=100
     
-    this.input.on('pointerover', function (event, gameObjects) {
-      gameObjects[0].setTexture('blueButton2');
+    this.soundOn = new Button(this, 50,50, 'soundOn', 'soundOff', () => {
+      this.bgMusic.stop() ? this.bgMusic.stop() : this.bgMusic.play()
     });
+    this.soundOn.depth=200
     
-    this.input.on('pointerout', function (event, gameObjects) {
-      gameObjects[0].setTexture('blueButton1');
-    });
+    
+
+    
 
    this.far = this.add.tileSprite(
      0, 

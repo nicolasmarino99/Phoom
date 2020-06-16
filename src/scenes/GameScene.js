@@ -12,6 +12,7 @@ import Goblin from './charaters/enemies/Goblin'
 import Skeleton from './charaters/enemies/Skeleton'
 import { adjustBodies } from "./charaters/settingsCharBodies"; 
 import { addCoinsToScenario } from "./items/coins/coinsIter"; 
+import Button from "./ui/Button";
 
 export default class GameScene extends Phaser.Scene {
   constructor () {
@@ -87,16 +88,6 @@ export default class GameScene extends Phaser.Scene {
    
     
     
-    this.skeleton1 = this.physics.add.group({
-      key: 'skeleton',
-      repeat: 2,
-      setXY: { x: 5000, y: 230, stepX: 180 }
-    })
-    this.skeleton2 = this.physics.add.group({
-      key: 'skeleton',
-      repeat: 1,
-      setXY: { x: 6000, y: 230, stepX: 160 }
-    })
     
     addCoinsToScenario(this)
 
@@ -125,10 +116,17 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.skeleton,this.hero)
     
     
+    this.soundOn = new Button(this, 0,0, 'soundOn', 'soundOff', () => {
+      this.gameMusic.stop() ? this.gameMusic.stop() : this.gameMusic.play()
+    });
+    this.soundOn.depth=200
+    
     //Adjust camara settings and collider hero size
 
     this.camera = this.cameras.main;
+    
     this.camera.startFollow(this.hero);
+    this.camera.setOrigin(this.soundOn)
     
     this.camera.setFollowOffset(-300, 165);
 
