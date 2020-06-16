@@ -126,7 +126,7 @@ export default class GameScene extends Phaser.Scene {
     this.camera = this.cameras.main;
     
     this.camera.startFollow(this.hero);
-    this.camera.setOrigin(this.soundOn)
+    //this.camera.setOrigin(this.soundOn)
     
     this.camera.setFollowOffset(-300, 165);
 
