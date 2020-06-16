@@ -110,9 +110,15 @@ export default class MenuScene extends Phaser.Scene {
       'PHOOM',
       186
     )
-    
-    this.frameNames = this.textures.get('rain').getFrameNames()
-    
+    agrid.placeAtIndex(57,logo)
+    let credits = this.add.bitmapText(
+      0,
+      0,
+      'font',
+      'Created by Nicolas Marino :D',
+      46
+    )
+    agrid.placeAtIndex(207,credits)
 
     //Animation to the rain
 
@@ -130,7 +136,7 @@ export default class MenuScene extends Phaser.Scene {
 
     //agrid.showNumbers()
 
-    agrid.placeAtIndex(57,logo)
+    
   }
 
   update () {

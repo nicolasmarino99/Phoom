@@ -48,7 +48,8 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('bg_4', './src/assets/level1/map/far-grounds.png');
     this.load.audio('gameMusic', ['./src/assets/music/game/darkambient.OGG']);
     this.load.audio('coinMusic', ['./src/assets/music/game/pleasing-bell.wav']);
-    
+    this.load.image('pause1', './src/assets/ui/buttons/menu/pause1.png')
+    this.load.image('pause2', './src/assets/ui/buttons/menu/pause2.png')
     //load custom Fonts
 
     

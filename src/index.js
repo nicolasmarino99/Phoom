@@ -6,7 +6,7 @@ import PreloaderScene from './Scenes/PreloaderScene';
 import TitleScene from './Scenes/TitleScene';
 import MenuScene from './scenes/MenuScene';
 import CreditsScene from './Scenes/CreditsScene';
-
+import gameUi from './Scenes/gameSceneUi';
 
 
 class Game extends Phaser.Game {
@@ -18,6 +18,7 @@ class Game extends Phaser.Game {
     this.scene.add('Menu', MenuScene);
     this.scene.add('Credits', CreditsScene);
     this.scene.add('Game', GameScene);
+    this.scene.add('game-ui', gameUi);
     this.scene.start('Menu');
   }
 }
