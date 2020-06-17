@@ -15,8 +15,8 @@ export default class MenuScene extends Phaser.Scene {
 
     this.load.bitmapFont(
       'font',
-      './src/assets/fonts/menu/font.png',
-      './src/assets/fonts/menu/font.fnt'
+      './src/assets/fonts/menu2/font.png',
+      './src/assets/fonts/menu2/font.fnt'
     )
   
     // Load paralax layers

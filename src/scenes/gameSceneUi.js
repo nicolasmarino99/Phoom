@@ -2,13 +2,14 @@ import "phaser";
 import Button from "./ui/Button";
 import {AlignGrid} from "../util/alignGrid";
 import {Align} from "../util/align";
+import { gameState } from "./GameScene";
  
 export default class gameUi extends Phaser.Scene {
     constructor() {
         super('game-ui')
     }
     create() {
-
+        
         let agrid = new AlignGrid({scene:this, rows: 10, cols: 25})
         //agrid.showNumbers()
         this.gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
@@ -38,14 +39,9 @@ export default class gameUi extends Phaser.Scene {
         this.orb.setOrigin(0.619,0.45)
         this.health.setOrigin(0.04,0.27)
 
-        let credits = this.add.bitmapText(
-            0,
-            0,
-            'font',
-            'Created by Nicolas Marino :D',
-            46
-          )
-          agrid.placeAtIndex(207,credits)
+        
+          //console.log(gameState.score)
+          
     }
     }
 
