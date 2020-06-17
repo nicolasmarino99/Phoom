@@ -13,7 +13,7 @@ import Skeleton from './charaters/enemies/Skeleton'
 import { adjustBodies } from "./charaters/settingsCharBodies"; 
 import { addCoinsToScenario } from "./items/coins/coinsIter"; 
 
-export let gameState = {
+let gameState = {
   score: 0
 } 
 export default class GameScene extends Phaser.Scene {
@@ -132,7 +132,7 @@ export default class GameScene extends Phaser.Scene {
     this.scoreText  = this.add.bitmapText(
       0,
       0,
-      'font',
+      'font2',
       'Points:' + gameState.score,
       46
     )
@@ -141,7 +141,7 @@ export default class GameScene extends Phaser.Scene {
       coin.disableBody(true, true);
       gameState.name = 'Nicolas' 
       gameState.score += 1000 
-      //this.scoreText.setText('Score: ' + gameState.score);
+      this.scoreText.setText('Score: ' + gameState.score);
     }
     this.physics.add.overlap(this.hero, this.coinsb, collectCoin, null, this);
     this.physics.add.overlap(this.hero, this.coinsg, collectCoin, null, this);

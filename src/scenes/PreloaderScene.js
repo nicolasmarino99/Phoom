@@ -53,6 +53,17 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.load.image('ManaPanel','./src/assets/ui/health/ManaPanel.png')
     this.load.image('orb','./src/assets/ui/health/orb.png')
+
+    this.load.bitmapFont(
+      'font2',
+      './src/assets/fonts/menu2/font.png',
+      './src/assets/fonts/menu2/font.fnt'
+    )
+    this.load.bitmapFont(
+      'font3',
+      './src/assets/fonts/menu3/font.png',
+      './src/assets/fonts/menu3/font.fnt'
+    )
     //load custom Fonts
 
     

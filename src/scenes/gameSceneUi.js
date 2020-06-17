@@ -2,8 +2,7 @@ import "phaser";
 import Button from "./ui/Button";
 import {AlignGrid} from "../util/alignGrid";
 import {Align} from "../util/align";
-import { gameState } from "./GameScene";
- 
+
 export default class gameUi extends Phaser.Scene {
     constructor() {
         super('game-ui')
