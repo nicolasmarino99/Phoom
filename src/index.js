@@ -3,9 +3,9 @@ import config from './config/config';
 import GameScene from './Scenes/GameScene';
 import BootScene from './Scenes/BootScene';
 import PreloaderScene from './Scenes/PreloaderScene';
-import TitleScene from './Scenes/TitleScene';
+import scoresScene from './scenes/scoresScene';
 import MenuScene from './scenes/MenuScene';
-import CreditsScene from './Scenes/CreditsScene';
+import InstructionsScene from './scenes/InstructionsScene';
 import gameUi from './Scenes/gameSceneUi';
 
 
@@ -14,9 +14,9 @@ class Game extends Phaser.Game {
     super(config);
     this.scene.add('Boot', BootScene);
     this.scene.add('Preloader', PreloaderScene);
-    this.scene.add('Title', TitleScene);
+    this.scene.add('Scores', scoresScene);
     this.scene.add('Menu', MenuScene);
-    this.scene.add('Credits', CreditsScene);
+    this.scene.add('Instructions', InstructionsScene);
     this.scene.add('Game', GameScene);
     this.scene.add('game-ui', gameUi);
     this.scene.start('Menu');

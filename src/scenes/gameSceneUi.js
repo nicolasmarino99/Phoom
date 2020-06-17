@@ -37,6 +37,15 @@ export default class gameUi extends Phaser.Scene {
         agrid.placeAtIndex(48,this.orb)
         this.orb.setOrigin(0.619,0.45)
         this.health.setOrigin(0.04,0.27)
+
+        let credits = this.add.bitmapText(
+            0,
+            0,
+            'font',
+            'Created by Nicolas Marino :D',
+            46
+          )
+          agrid.placeAtIndex(207,credits)
     }
     }
 

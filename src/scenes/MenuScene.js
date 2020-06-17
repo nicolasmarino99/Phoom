@@ -57,6 +57,18 @@ export default class MenuScene extends Phaser.Scene {
     }).setScale(.5,.4);
     agrid.placeAtIndex(162,this.gameButton)
     this.gameButton.depth=100
+
+    this.ad = new Button(this, 0, 100, 'blueButton1', 'blueButton2', () => {
+      this.scene.start('Boot');
+      this.bgMusic.stop();
+    }).setScale(.5,.4)
+    
+    ;
+
+    this.as = new Button(this, 0, 200, 'blueButton1', 'blueButton2', () => {
+      this.scene.start('Boot');
+      this.bgMusic.stop();
+    }).setScale(.5,.4);
     
     this.soundOn = new Button(this, 50,50, 'soundOn', 'soundOff', () => {
       this.bgMusic.stop() ? this.bgMusic.stop() : this.bgMusic.play()
