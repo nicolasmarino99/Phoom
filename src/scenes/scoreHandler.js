@@ -21,7 +21,7 @@ export default class scoreHandler extends Phaser.Scene {
             250,
             30,
             'font2',
-            '',
+            'Score: 0',
             46
           )
           

@@ -30,15 +30,15 @@ export default class gameUi extends Phaser.Scene {
         }).setScale(.5);
         
         
-          this.clockStampTitle  = this.add.bitmapText(
-            500,
-            30,
-            'font2',
-            'Time',
-            46
-            )
+        this.clockStampTitle  = this.add.bitmapText(
+        550,
+        30,
+        'font2',
+        'Time',
+        46
+        )
         this.clockStamp  = this.add.bitmapText(
-        650,
+        700,
         30,
         'font2',
         '',

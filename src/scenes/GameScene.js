@@ -64,7 +64,7 @@ export default class GameScene extends Phaser.Scene {
     //  faceColor: new Phaser.Display.Color(40,39,37,255)
     //})
 
-    this.hero = this.physics.add.sprite(200,310,'hero').setBounce(0.3)
+    this.hero = this.physics.add.sprite(100,310,'hero').setBounce(0.3)
     
 
     this.boss = this.physics.add.group({
@@ -130,23 +130,15 @@ export default class GameScene extends Phaser.Scene {
   
     this.coinMusic = this.sound.add('coinMusic', { volume: 0.6, loop: false });
     
-    this.scoreText  = this.add.bitmapText(
-      0,
-      0,
-      'font2',
-      'Points:' + gameState.score,
-      46
-    )
-    
     function collectCoin(player, coin) {
       this.coinMusic.play();
       coin.disableBody(true, true);
       gameState.name = 'Nicolas' 
       gameState.score += 20 
       this.scene.run('score-handler', {gameData: gameState})
-      ;
+    
     }
-    this.scoreText.setText('Score: ' + gameState.score)
+  
 
     this.physics.add.overlap(this.hero, this.coinsb, collectCoin, null, this);
     this.physics.add.overlap(this.hero, this.coinsg, collectCoin, null, this);

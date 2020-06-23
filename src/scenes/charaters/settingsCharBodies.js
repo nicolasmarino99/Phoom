@@ -37,7 +37,7 @@ export const adjustBodies = (scenario) => {
 
   scenario.coinsb.children.iterate( child => {
     Align.scaleToGameW(child, 0.02)
-    child.body.offset.y = 10
+    child.body.offset.y = 20
     child.anims.play('shine1',true)
     
   });
