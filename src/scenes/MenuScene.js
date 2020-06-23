@@ -12,7 +12,6 @@ export default class MenuScene extends Phaser.Scene {
  
   preload () {
     this.load.atlas('rain','./src/assets/ui/rain/rain.png','./src/assets/ui/rain/rain.json')
-
     this.load.bitmapFont(
       'font',
       './src/assets/fonts/menu/font.png',
@@ -46,29 +45,38 @@ export default class MenuScene extends Phaser.Scene {
     
  
     this.gameText = this.add.text(0, 0, 'Play', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '40px', fill: '#fff' });
-    agrid.placeAtIndex(161,this.gameText.setOrigin(-0.3,0.5))
+    agrid.placeAtIndex(136,this.gameText.setOrigin(-0.3,0.5))
     this.gameText.depth=101
-    
+    this.leaderBoardText = this.add.text(0, 0, 'Leaderboard', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '40px', fill: '#fff' });
+    agrid.placeAtIndex(184,this.leaderBoardText.setOrigin(-0.3,0.5))
+    this.leaderBoardText.depth=101
+    //this.gameTextB = this.add.text(0, 0, 'Play', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '40px', fill: '#fff' });
+    //agrid.placeAtIndex(161,this.gameTextB.setOrigin(-0.3,0.5))
+    //this.gameTextB.depth=101
     
    
     this.gameButton = new Button(this, 0, 0, 'blueButton1', 'blueButton2', () => {
       this.scene.start('Boot');
       this.bgMusic.stop();
-    }).setScale(.5,.4);
-    agrid.placeAtIndex(162,this.gameButton)
+    }).setScale(.7,.5);
+    agrid.placeAtIndex(137,this.gameButton)
     this.gameButton.depth=100
 
-    this.ad = new Button(this, 0, 100, 'blueButton1', 'blueButton2', () => {
+    this.leaderBoardBtn = new Button(this, 0, 0, 'blueButton1', 'blueButton2', () => {
       this.scene.start('Boot');
       this.bgMusic.stop();
-    }).setScale(.5,.4)
+    }).setScale(.7,.5)
+    agrid.placeAtIndex(187,this.leaderBoardBtn)
+    this.leaderBoardBtn.depth=100
     
-    ;
+    
 
-    this.as = new Button(this, 0, 200, 'blueButton1', 'blueButton2', () => {
-      this.scene.start('Boot');
-      this.bgMusic.stop();
-    }).setScale(.5,.4);
+    //this.as = new Button(this, 50, 50, 'blueButton1', 'blueButton2', () => {
+    //  this.scene.start('Boot');
+    //  this.bgMusic.stop();
+    //}).setScale(.5,.4);
+    //agrid.placeAtIndex(162,this.as )
+    //this.as.depth=100
     
     this.soundOn = new Button(this, 50,50, 'soundOn', 'soundOff', () => {
       this.bgMusic.stop() ? this.bgMusic.stop() : this.bgMusic.play()
@@ -122,7 +130,7 @@ export default class MenuScene extends Phaser.Scene {
       'PHOOM',
       186
     )
-    agrid.placeAtIndex(57,logo)
+    agrid.placeAtIndex(32,logo)
     let credits = this.add.bitmapText(
       0,
       0,

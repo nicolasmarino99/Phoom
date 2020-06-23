@@ -7,8 +7,12 @@ export default class gameUi extends Phaser.Scene {
     constructor() {
         super('game-ui')
     }
+    
     create() {
         
+
+
+
         let agrid = new AlignGrid({scene:this, rows: 10, cols: 25})
         //agrid.showNumbers()
         this.gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
@@ -25,8 +29,25 @@ export default class gameUi extends Phaser.Scene {
             this.gameMusic.stop();
         }).setScale(.5);
         
-
         
+          this.clockStampTitle  = this.add.bitmapText(
+            500,
+            30,
+            'font2',
+            'Time',
+            46
+            )
+        this.clockStamp  = this.add.bitmapText(
+        650,
+        30,
+        'font2',
+        '',
+        46
+        )
+
+        this.clock = this.plugins.get('rexClock').add(this);
+        this.clock.start();
+        this.text = this.add.text(500, 500, '');
 
         this.health = this.add.sprite(0, 0, 'ManaPanel')
         this.health.flipY = true
@@ -42,6 +63,11 @@ export default class gameUi extends Phaser.Scene {
           //console.log(gameState.score)
           
     }
+    update() {
+        this.clockStamp.setText(Phaser.Math.FloorTo(this.clock.now * 0.001));
+       
+        
     }
+}
 
     

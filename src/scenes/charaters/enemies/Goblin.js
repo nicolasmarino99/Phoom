@@ -23,7 +23,7 @@ export default class Goblin extends Phaser.Physics.Arcade.Sprite {
                 var value = Phaser.Math.Between(0,1);
                 this.direction = value
                 this.anims.play('attackgoblin',true)
-                console.log(value)
+               
             },
             loop: true
         })

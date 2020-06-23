@@ -1,4 +1,5 @@
 import 'phaser';
+import ClockPlugin from 'phaser3-rex-plugins/plugins/clock-plugin.js';
 
  
 export default {
@@ -6,6 +7,13 @@ export default {
     parent: "phaser-example",
     width: 1500,
     height: 700,
+    plugins: {
+        global: [{
+            key: 'rexClock',
+            plugin: ClockPlugin,
+            start: true
+        }]
+    },
     physics: {
         default: 'arcade',
         arcade: {

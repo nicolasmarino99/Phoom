@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "phaser": "^3.20.1",
-    "phaser-raycaster": "^0.8.0"
+    "phaser-raycaster": "^0.8.0",
+    "phaser3-rex-plugins": "^1.1.19"
   }
 }

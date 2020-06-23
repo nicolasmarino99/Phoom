@@ -20,7 +20,7 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite {
                 var value = Phaser.Math.Between(0,1);
                 this.direction = value
                 this.anims.play('attackske',true)
-                console.log(value)
+                
             },
             loop: true
         })

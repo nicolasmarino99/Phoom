@@ -7,7 +7,7 @@ import scoresScene from './scenes/scoresScene';
 import MenuScene from './scenes/MenuScene';
 import InstructionsScene from './scenes/InstructionsScene';
 import gameUi from './Scenes/gameSceneUi';
-
+import scoreHandler from './Scenes/scoreHandler';
 
 class Game extends Phaser.Game {
   constructor () {
@@ -19,6 +19,7 @@ class Game extends Phaser.Game {
     this.scene.add('Instructions', InstructionsScene);
     this.scene.add('Game', GameScene);
     this.scene.add('game-ui', gameUi);
+    this.scene.add('score-handler', scoreHandler);
     this.scene.start('Menu');
   }
 }

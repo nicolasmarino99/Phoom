@@ -13,9 +13,7 @@ import Skeleton from './charaters/enemies/Skeleton'
 import { adjustBodies } from "./charaters/settingsCharBodies"; 
 import { addCoinsToScenario } from "./items/coins/coinsIter"; 
 
-let gameState = {
-  score: 0
-} 
+
 export default class GameScene extends Phaser.Scene {
   constructor () {
     super('Game');
@@ -27,8 +25,11 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create () {
+    let gameState = {
+      score: 0
+    } 
 
-    this.scene.run('game-ui')
+    this.scene.run('game-ui', {gameData: gameState})
     
 
     /* Add Paralax background */
@@ -136,13 +137,17 @@ export default class GameScene extends Phaser.Scene {
       'Points:' + gameState.score,
       46
     )
+    
     function collectCoin(player, coin) {
       this.coinMusic.play();
       coin.disableBody(true, true);
       gameState.name = 'Nicolas' 
-      gameState.score += 1000 
-      this.scoreText.setText('Score: ' + gameState.score);
+      gameState.score += 20 
+      this.scene.run('score-handler', {gameData: gameState})
+      ;
     }
+    this.scoreText.setText('Score: ' + gameState.score)
+
     this.physics.add.overlap(this.hero, this.coinsb, collectCoin, null, this);
     this.physics.add.overlap(this.hero, this.coinsg, collectCoin, null, this);
     this.physics.add.overlap(this.hero, this.coinso, collectCoin, null, this);
@@ -158,6 +163,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.keys = this.input.keyboard.addKeys('Z,X,A,S')
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    console.log(gameState.score)
   }
 
 

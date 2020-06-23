@@ -22,7 +22,7 @@ export default class Mushroom extends Phaser.Physics.Arcade.Sprite {
             callback: () => {
                 var value = Phaser.Math.Between(0,1);
                 this.direction = value
-                console.log(value)
+               
             },
             loop: true
         })
