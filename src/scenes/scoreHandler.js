@@ -9,14 +9,7 @@ export default class scoreHandler extends Phaser.Scene {
         this.scoreUI = data.gameData.score
     }
     create() {
-        
 
-
-
-      
-
-        
-        
         this.scoreText  = this.add.bitmapText(
             250,
             30,
@@ -24,15 +17,6 @@ export default class scoreHandler extends Phaser.Scene {
             'Score: 0',
             46
           )
-          
-          
-         
-          
-    
-        
-        
-        
-          //console.log(gameState.score)
           
     }
     update() {
