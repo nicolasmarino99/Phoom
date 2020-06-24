@@ -106,6 +106,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.coinsb, layerPlatforms);
     this.physics.add.collider(this.coinsg, layerPlatforms);
     this.physics.add.collider(this.coinso, layerPlatforms);
+    
 
     this.physics.add.collider(this.hero,layerPlatforms)
 
@@ -122,6 +123,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this.skeleton,this.hero)
 
     this.physics.add.collider(this.portal,layerPlatforms)
+   
     
     
     
@@ -144,10 +146,11 @@ export default class GameScene extends Phaser.Scene {
     
     }
   
-
+    this.activateCoin = this.physics.add.sprite(100,310,'cb')
     this.physics.add.overlap(this.hero, this.coinsb, collectCoin, null, this);
     this.physics.add.overlap(this.hero, this.coinsg, collectCoin, null, this);
     this.physics.add.overlap(this.hero, this.coinso, collectCoin, null, this);
+    this.physics.add.overlap(this.hero, this.activateCoin, collectCoin, null, this);
     
     
     blueCoinAnims(this)
@@ -173,11 +176,9 @@ export default class GameScene extends Phaser.Scene {
      repeat: -1
    })
 
-  //this.portalFrame.physics.add.group({
-  //  key: 'cb',
-  //  repeat: 11*5,
-  //  setXY: { x: 19, y: 0, stepX: 70 }
-  //
+   
+
+    
   }
 
 
@@ -223,6 +224,8 @@ export default class GameScene extends Phaser.Scene {
         } else if(this.cursors.down.isDown) {
             this.hero.anims.play("slide",true) 
             this.hero.body.setSize(this.hero.width*0.5,this.hero.height*0.5)
+            this.hero.body.offset.y = 16
+              this.hero.body.offset.x = 10
 
         } else {
             this.hero.anims.play("run",true)

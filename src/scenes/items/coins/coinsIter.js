@@ -1,8 +1,8 @@
 export const addCoinsToScenario = (scenario) => {
     scenario.coinsb = scenario.physics.add.group({
-        key: 'cb',
-        repeat: 11*5,
-        setXY: { x: 19, y: 0, stepX: 70 }
+      key: 'cb',
+      repeat: 11*5,
+      setXY: { x: 149, y: 0, stepX: 70 }
     })
     scenario.coinsg = scenario.physics.add.group({
       key: 'cg',
