@@ -52,7 +52,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('pause1', './src/assets/ui/buttons/menu/pause1.png')
     this.load.image('pause2', './src/assets/ui/buttons/menu/pause2.png')
 
-    this.load.atlas('portal2', portalimg, portalJSON)
+    this.load.atlas('portal', portalimg, portalJSON)
    
 
     this.load.plugin('rexclockplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexclockplugin.min.js', true);
@@ -71,10 +71,6 @@ export default class PreloaderScene extends Phaser.Scene {
       './src/assets/fonts/menu3/font.fnt'
     )
     //load custom Fonts
-
-    
-
-    // This "for" emulates false charging, delaying the bar sending 500 load image queries
     
 
     // create and aligned progress Bar and container. Render first Progress container

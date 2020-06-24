@@ -65,7 +65,10 @@ export default class GameScene extends Phaser.Scene {
     //})
 
     this.hero = this.physics.add.sprite(100,310,'hero').setBounce(0.3)
-    
+    this.hero.depth = 20000
+
+  
+    this.portal = this.physics.add.sprite(6940,0,'portal').setScale(5,7.5)
 
     this.boss = this.physics.add.group({
       classType: Boss,
@@ -117,6 +120,8 @@ export default class GameScene extends Phaser.Scene {
     
     this.physics.add.collider(this.skeleton,layerPlatforms)
     this.physics.add.collider(this.skeleton,this.hero)
+
+    this.physics.add.collider(this.portal,layerPlatforms)
     
     
     
@@ -156,24 +161,32 @@ export default class GameScene extends Phaser.Scene {
     this.keys = this.input.keyboard.addKeys('Z,X,A,S')
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    console.log(gameState.score)
+    //this.heroi = this.add.sprite(200,110,'hero').setScale(4)
 
 
-    this.portalFrame = this.add.sprite(6960,260,'portal2',0).setScale(5,2.5)
+    //this.portal = this.physics.add.sprite(6960,0,'portal').setScale(5,2.5)
 
-        this.anims.create({
-            key: 'portal',
-            frames: this.anims.generateFrameNames('portal2', {start: 16, end: 4, zeroPad: 2, prefix: '', suffix: '.png'}),
-            frameRate: 16,
-            repeat: -1
-          })
+   this.anims.create({
+     key: 'portal',
+     frames: this.anims.generateFrameNames('portal', {start: 16, end: 4, zeroPad: 2, prefix: '', suffix: '.png'}),
+     frameRate: 16,
+     repeat: -1
+   })
+
+  //this.portalFrame.physics.add.group({
+  //  key: 'cb',
+  //  repeat: 11*5,
+  //  setXY: { x: 19, y: 0, stepX: 70 }
+  //
   }
 
 
 
   update(x,dx) {
     
-   this.portalFrame.anims.play('portal',true)
+   this.portal.anims.play('portal',true)
+   this.portal.body.setSize(this.hero.width*0.5,this.hero.height*0.)
+   //this.heroi.anims.play('attack1',true);
     
     adjustBodies(this)
 
@@ -209,6 +222,7 @@ export default class GameScene extends Phaser.Scene {
             
         } else if(this.cursors.down.isDown) {
             this.hero.anims.play("slide",true) 
+            this.hero.body.setSize(this.hero.width*0.5,this.hero.height*0.5)
 
         } else {
             this.hero.anims.play("run",true)
@@ -254,10 +268,6 @@ export default class GameScene extends Phaser.Scene {
         
     }
 
-    if (this.cursors.down.isDown ) {
-        
-      this.hero.anims.play("down",true)
-      
-  }
+    
   }
 };
