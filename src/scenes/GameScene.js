@@ -70,7 +70,7 @@ export default class GameScene extends Phaser.Scene {
     this.boss = this.physics.add.group({
       classType: Boss,
     })
-    this.boss.get(7000,100,'boss')
+    this.boss.get(6500,100,'boss')
     
 
     this.mushroom = this.physics.add.group({
@@ -157,13 +157,23 @@ export default class GameScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     console.log(gameState.score)
+
+
+    this.portalFrame = this.add.sprite(6960,260,'portal2',0).setScale(5,2.5)
+
+        this.anims.create({
+            key: 'portal',
+            frames: this.anims.generateFrameNames('portal2', {start: 16, end: 4, zeroPad: 2, prefix: '', suffix: '.png'}),
+            frameRate: 16,
+            repeat: -1
+          })
   }
 
 
 
   update(x,dx) {
     
-    
+   this.portalFrame.anims.play('portal',true)
     
     adjustBodies(this)
 
@@ -193,7 +203,7 @@ export default class GameScene extends Phaser.Scene {
         this.hero.setVelocityX(100)
         this.hero.flipX=false
         if (this.cursors.shift.isDown) {
-            this.hero.setVelocityX(170)
+            this.hero.setVelocityX(1170)
             
             this.hero.anims.play("runSlow",true) 
             

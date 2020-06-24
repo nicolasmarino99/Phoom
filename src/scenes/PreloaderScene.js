@@ -16,7 +16,8 @@ import skeletonimg from '../assets/level1/enemies/Skeleton/skeleton.png'
 import skeletonJSON from '../assets/level1/enemies/Skeleton/skeleton.json';
 import bossimg from '../assets/level1/enemies/boss/boss.png'
 import bossJSON from '../assets/level1/enemies/boss/boss.json';
-
+import portalJSON from '../assets/portals/portal2/portal2.json'
+import portalimg from '../assets/portals/portal2/portal2.png';
 
 
 
@@ -51,8 +52,8 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('pause1', './src/assets/ui/buttons/menu/pause1.png')
     this.load.image('pause2', './src/assets/ui/buttons/menu/pause2.png')
 
-    this.load.image('portal1','./src/assets/portals/portal1.7z')
-    this.load.image('portal2','./src/assets/portals/portal2.png')
+    this.load.atlas('portal2', portalimg, portalJSON)
+   
 
     this.load.plugin('rexclockplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexclockplugin.min.js', true);
 

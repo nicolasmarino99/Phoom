@@ -60,12 +60,15 @@ export default class gameUi extends Phaser.Scene {
         this.health.setOrigin(0.04,0.27)
 
         
-          //console.log(gameState.score)
+      
+
+        
+          
           
     }
     update() {
         this.clockStamp.setText(Phaser.Math.FloorTo(this.clock.now * 0.001));
-       
+        
         
     }
 }
