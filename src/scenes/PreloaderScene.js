@@ -30,8 +30,9 @@ export default class PreloaderScene extends Phaser.Scene {
  
 
   preload() {
-
     
+    
+
     this.load.image('tiles', './src/assets/level1/map/tileset.png');
     this.load.tilemapCSV('level1CSV','./src/assets/level1/map/level1.csv')
     this.load.tilemapTiledJSON('level1JSON','./src/assets/level1/map/level1.json')
@@ -49,6 +50,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('bg_4', './src/assets/level1/map/far-grounds.png');
     this.load.audio('gameMusic', ['./src/assets/music/game/darkambient.OGG']);
     this.load.audio('coinMusic', ['./src/assets/music/game/pleasing-bell.wav']);
+    this.load.audio('winningMusic', ['./src/assets/music/winning/winning.mp3']);
     this.load.image('pause1', './src/assets/ui/buttons/menu/pause1.png')
     this.load.image('pause2', './src/assets/ui/buttons/menu/pause2.png')
 

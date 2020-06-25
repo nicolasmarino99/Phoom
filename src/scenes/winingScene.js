@@ -13,61 +13,24 @@ export default class Winning extends Phaser.Scene {
 
 
 
-        let agrid = new AlignGrid({scene:this, rows: 10, cols: 25})
-        //agrid.showNumbers()
-        this.gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
-        this.gameMusic.play();
-
-        this.soundOn = new Button(this, 50,50, 'soundOn', 'soundOff', () => {
-            this.gameMusic.stop() ? this.gameMusic.stop() : this.gameMusic.play()
-        });
+        this.winningMusic = this.sound.add('winningMusic', { volume: 0.6, loop: false });
+        this.winningMusic.play()
         
-
-        this.menu = new Button(this, 130,50, 'pause1', 'pause2', () => {
-            this.scene.start('Menu');
-            this.scene.stop('Game');
-            this.gameMusic.stop();
-        }).setScale(.5);
-        
-        
-        this.clockStampTitle  = this.add.bitmapText(
-        550,
-        30,
-        'font2',
-        'Time',
-        46
-        )
-        this.clockStamp  = this.add.bitmapText(
-        700,
-        30,
-        'font2',
-        '',
-        46
-        )
-
-        this.clock = this.plugins.get('rexClock').add(this);
-        this.clock.start();
-        this.text = this.add.text(500, 500, '');
-
-        this.health = this.add.sprite(0, 0, 'ManaPanel')
-        this.health.flipY = true
-
-        this.orb = this.add.sprite(0, 0, 'orb')
-        
-        agrid.placeAtIndex(16,this.health)
-        agrid.placeAtIndex(48,this.orb)
-        this.orb.setOrigin(0.619,0.45)
-        this.health.setOrigin(0.04,0.27)
-
+        var bg = this.add.graphics();
+        bg.fillStyle(0x222222, 0.8);
+        bg.fillRect(0, 0, 1700, 800);
         
       
+        var progressBar = this.add.graphics();
 
+        progressBar.fillStyle(0xFFAA00,1);
+        progressBar.fillRect(500, 200, 500, 400);
         
-          
+          progressBar.depth = 100000
           
     }
     update() {
-        this.clockStamp.setText(Phaser.Math.FloorTo(this.clock.now * 0.001));
+        
         
         
     }

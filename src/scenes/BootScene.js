@@ -11,6 +11,6 @@ export default class BootScene extends Phaser.Scene {
 
   create () {
     this.input.setDefaultCursor('url(./src/assets/ui/cursor/cursor1.png), pointer')
-    this.scene.start('Preloader');
+    this.scene.start('Preloader')
   }
 };

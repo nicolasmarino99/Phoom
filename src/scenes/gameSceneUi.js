@@ -7,6 +7,11 @@ export default class gameUi extends Phaser.Scene {
     constructor() {
         super('game-ui')
     }
+    init(data) {
+        this.gameMusic = data.gameMusic
+        this.clock = data.clock
+
+    }
     
     create() {
         
@@ -15,7 +20,8 @@ export default class gameUi extends Phaser.Scene {
 
         let agrid = new AlignGrid({scene:this, rows: 10, cols: 25})
         //agrid.showNumbers()
-        this.gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
+        //this.gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
+        console.log(this.gameMusic)
         this.gameMusic.play();
 
         this.soundOn = new Button(this, 50,50, 'soundOn', 'soundOff', () => {

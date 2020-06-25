@@ -4,6 +4,7 @@ import "phaser";
 export default class scoreHandler extends Phaser.Scene {
     constructor() {
         super('score-handler')
+        
     }
     init(data) {
         this.scoreUI = data.gameData.score

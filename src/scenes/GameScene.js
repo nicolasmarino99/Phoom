@@ -19,6 +19,11 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
    
   }
+  init(data) {
+    this.gameMusic = data.gameMusic
+    this.clock = data.clock
+
+}
 
   preload () {
     
@@ -28,8 +33,14 @@ export default class GameScene extends Phaser.Scene {
     let gameState = {
       score: 0
     } 
+    let clock = this.plugins.get('rexClock').add(this);
+    let gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
 
-    this.scene.run('game-ui', {gameData: gameState})
+    this.scene.run('game-ui', {
+      gameData: gameState,
+      clock,
+      gameMusic
+    })
     
 
     /* Add Paralax background */
@@ -137,12 +148,29 @@ export default class GameScene extends Phaser.Scene {
   
     this.coinMusic = this.sound.add('coinMusic', { volume: 0.6, loop: false });
     
+    
+
     function collectCoin(player, coin) {
       this.coinMusic.play();
       coin.disableBody(true, true);
       gameState.name = 'Nicolas' 
       gameState.score += 20 
-      this.scene.run('score-handler', {gameData: gameState})
+      this.scene.run('score-handler', {
+        gameData: gameState,
+        clock,
+        gameMusic
+      })
+    
+    }
+
+    function winGame(player, coin) {
+     
+      coin.disableBody(true, true);
+      gameMusic.stop()
+      
+      clock.stop();
+      this.scene.run('winning', {gameData: gameState,clock})  
+      
     
     }
   
@@ -151,6 +179,8 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.overlap(this.hero, this.coinsg, collectCoin, null, this);
     this.physics.add.overlap(this.hero, this.coinso, collectCoin, null, this);
     this.physics.add.overlap(this.hero, this.activateCoin, collectCoin, null, this);
+
+    this.physics.add.overlap(this.hero, this.portal, winGame, null, this);
     
     
     blueCoinAnims(this)
