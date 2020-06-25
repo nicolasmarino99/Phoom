@@ -34,7 +34,7 @@ export default class GameScene extends Phaser.Scene {
       score: 0
     } 
     let clock = this.plugins.get('rexClock').add(this);
-    let gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
+    let gameMusic = this.sound.add('gameMusic', { volume: 0.07, loop: true });
 
     this.scene.run('game-ui', {
       gameData: gameState,
@@ -207,7 +207,7 @@ export default class GameScene extends Phaser.Scene {
    })
 
    
-
+   this.stepsMusic = this.sound.add('steps', { volume: 0.05, loop: true, rate: 1.44, });
     
   }
 
@@ -215,13 +215,16 @@ export default class GameScene extends Phaser.Scene {
 
   update(x,dx) {
     
-   this.portal.anims.play('portal',true)
-   this.portal.body.setSize(this.hero.width*0.5,this.hero.height*0.)
-   //this.heroi.anims.play('attack1',true);
+    this.portal.anims.play('portal',true)
+    this.portal.body.setSize(this.hero.width*0.5,this.hero.height*0.)
+    //this.heroi.anims.play('attack1',true);
+
+    
+    
     
     adjustBodies(this)
 
-
+    
     this.bg_1.tilePositionX +=  0.6
     this.bg_2.tilePositionX +=  2
     this.bg_3.tilePositionX +=  0.5
@@ -231,6 +234,23 @@ export default class GameScene extends Phaser.Scene {
       this.hero.anims.play("jump1",true)
     },this)
   
+    this.cursors.right.on('down',()=>{
+      this.stepsMusic.play() 
+    },this)
+    
+    this.cursors.right.on('up',()=>{
+      this.stepsMusic.stop() 
+    },this)
+
+    this.cursors.left.on('down',()=>{
+      this.stepsMusic.play() 
+    },this)
+    
+    this.cursors.left.on('up',()=>{
+      this.stepsMusic.stop() 
+    },this)
+
+
     if (this.keys.Z.isDown) {
       
       this.hero.play('attack1',true);
@@ -246,6 +266,7 @@ export default class GameScene extends Phaser.Scene {
     }  else if (this.cursors.right.isDown ) {
         this.hero.setVelocityX(100)
         this.hero.flipX=false
+        
         if (this.cursors.shift.isDown) {
             this.hero.setVelocityX(1170)
             
@@ -259,6 +280,7 @@ export default class GameScene extends Phaser.Scene {
 
         } else {
             this.hero.anims.play("run",true)
+            //this.stepsMusic.stop()
         }
         
     

@@ -51,6 +51,10 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.audio('gameMusic', ['./src/assets/music/game/darkambient.OGG']);
     this.load.audio('coinMusic', ['./src/assets/music/game/pleasing-bell.wav']);
     this.load.audio('winningMusic', ['./src/assets/music/winning/winning.mp3']);
+    this.load.audio('steps', ['./src/assets/music/game/steps/steps2.ogg']);
+  
+  
+  
     this.load.image('pause1', './src/assets/ui/buttons/menu/pause1.png')
     this.load.image('pause2', './src/assets/ui/buttons/menu/pause2.png')
 
