@@ -68,7 +68,59 @@ export default class gameUi extends Phaser.Scene {
         
       
 
+        var text = this.add.bitmapText(
+            1200,
+            230,
+            'font3',
+            'Type your adventurers name ',
+            17
+            )
         
+           
+           var element = this.add.dom(1350, 300).createFromCache('nameform')
+           
+        
+           element.addListener('click');
+        
+            element.on('click', (event) => {
+        
+                if (event.target.name === 'playButton')
+                {
+                    var inputText = this.getChildByName('nameField');
+        
+                    //  Have they entered anything?
+                    if (inputText.value !== '')
+                    {
+                        //  Turn off the click events
+                        this.removeListener('click');
+        
+                        //  Hide the login element
+                        this.setVisible(false);
+        
+                        //  Populate the text with whatever they typed in
+                        text.setText('Player: ' + inputText.value);
+                    }
+                    else
+                    {
+                        //  Flash the prompt
+                        this.scene.tweens.add({
+                            targets: text,
+                            alpha: 0.2,
+                            duration: 250,
+                            ease: 'Power3',
+                            yoyo: true
+                        });
+                                }
+                }
+        
+            });
+         
+            this.tweens.add({
+                targets: element,
+                y: 270,
+                duration: 3000,
+                ease: 'Power3'
+            });
           
           
     }

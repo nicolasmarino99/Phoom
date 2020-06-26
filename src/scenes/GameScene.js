@@ -207,8 +207,9 @@ export default class GameScene extends Phaser.Scene {
    })
 
    
-   this.stepsMusic = this.sound.add('steps', { volume: 0.05, loop: true, rate: 1.44, });
-    
+   this.stepsMusic = this.sound.add('steps', { volume: 0.02, loop: true, rate: 1.44, });
+
+   
   }
 
 
@@ -254,12 +255,21 @@ export default class GameScene extends Phaser.Scene {
     if (this.keys.Z.isDown) {
       
       this.hero.play('attack1',true);
+      this.hero.body.setSize(this.hero.width*0.8,this.hero.height*0.8)
+          this.hero.body.offset.x = 10
+          this.hero.body.offset.y = 6
       
     }else if (this.keys.X.isDown ) {
     //  Animation will repeat twice and then emit the event
     this.hero.play('attack2',true);
+    this.hero.body.setSize(this.hero.width*1.2,this.hero.height*0.8)
+          this.hero.body.offset.x = 10
+          this.hero.body.offset.y = 6
   }else if (this.keys.A.isDown  ) {
     this.hero.play('attack3',true);
+    this.hero.body.setSize(this.hero.width*1.2,this.hero.height*0.8)
+          this.hero.body.offset.x = 10
+          this.hero.body.offset.y = 6
     
       
     
