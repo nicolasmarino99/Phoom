@@ -99,7 +99,7 @@ export default class gameUi extends Phaser.Scene {
                         element.setVisible(false);
         
                         //  Populate the text with whatever they typed in
-                        text.setText('                                             Player:    ' + inputText.value);
+                        text.setText('                                        Player:    ' + inputText.value);
                     }
                     else
                     {
