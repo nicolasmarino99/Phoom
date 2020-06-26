@@ -69,11 +69,11 @@ export default class gameUi extends Phaser.Scene {
       
 
         var text = this.add.bitmapText(
-            1200,
+            1150,
             230,
             'font3',
             'Type your adventurers name ',
-            17
+            20
             )
         
            
@@ -83,22 +83,23 @@ export default class gameUi extends Phaser.Scene {
            element.addListener('click');
         
             element.on('click', (event) => {
-        
+                console.log(event)
                 if (event.target.name === 'playButton')
                 {
-                    var inputText = this.getChildByName('nameField');
+                    console.log(inputText)
+                    var inputText = element.getChildByName('nameField');
         
                     //  Have they entered anything?
                     if (inputText.value !== '')
                     {
                         //  Turn off the click events
-                        this.removeListener('click');
+                        element.removeListener('click');
         
                         //  Hide the login element
-                        this.setVisible(false);
+                        element.setVisible(false);
         
                         //  Populate the text with whatever they typed in
-                        text.setText('Player: ' + inputText.value);
+                        text.setText('                                             Player:    ' + inputText.value);
                     }
                     else
                     {
