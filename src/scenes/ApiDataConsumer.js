@@ -33,17 +33,17 @@ const postApiData = async (base = '', data = {}) => {
 export const consumeGameData = {
   async getGameID(url = baseUrl) {
     let result;
-    if (localStorage.getItem('game_id') !== null) {
-      result = localStorage.getItem('game_id');
+    if (localStorage.getItem('Mygame_id') !== null) {
+      result = localStorage.getItem('Mygame_id');
     } else {
       const newGameID = await postApiData(`${url}/games/`, {
         name: "Phoom Game",
       });
-
+      console.log(newGameID)
       const newGameIDToJSON = JSON.parse(newGameID);
       const sliceArray = newGameIDToJSON.result.match(new RegExp('ID: ' + '(.*)' + ' added'));
       const [ID] = sliceArray[1];
-      localStorage.setItem('game_id', ID);
+      localStorage.setItem('Mygame_id', ID);
     }
     return result;
   },

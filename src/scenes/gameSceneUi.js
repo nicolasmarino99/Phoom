@@ -86,12 +86,15 @@ export default class gameUi extends Phaser.Scene {
                 console.log(event)
                 if (event.target.name === 'playButton')
                 {
-                    console.log(inputText)
+                    
                     var inputText = element.getChildByName('nameField');
         
                     //  Have they entered anything?
                     if (inputText.value !== '')
                     {
+                        
+                        this.registry.set('name', inputText.value);
+                        
                         //  Turn off the click events
                         element.removeListener('click');
         

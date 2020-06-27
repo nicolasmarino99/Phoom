@@ -14,32 +14,44 @@ export default class Winning extends Phaser.Scene {
     init(data) {
        
         this.score = data.gameState.score
-        this.name = data.gameState.name
+        this.name = this.registry.list.name
         //this.clock = data.clock
-        this.data = data
     
         
         
     }
     
     create() {
-       
-        (async () => {
-            if (this.score) {
-              await consumeGameData.postGameStats(this.name, this.score);
+
+        const compare = () => {
+            const bandA = a.band.toUpperCase();
+            const bandB = b.band.toUpperCase();
+
+            let comparison = 0;
+            if (bandA > bandB) {
+            comparison = 1;
+            } else if (bandA < bandB) {
+            comparison = -1;
             }
-          })();
-
-          (async () => {
-            let leaderBoard = await consumeGameData.getGamersStats()
-            leaderBoard = JSON.parse(JSON.stringify(leaderBoard))
-            console.log(leaderBoard)
-          })();
+            return comparison;
+            }
+        (async () => {
+        if (this.name !== '') {
+            await consumeGameData.postGameStats(this.name, this.score);
+            }
+        let leaderBoard = await consumeGameData.getGamersStats()
+        leaderBoard = JSON.parse(JSON.stringify(leaderBoard))
+        leaderBoard.forEach( (obj,i) => {
+            i+1
+            this.add.text(550, 30*(i), obj.user, { font: '22px Arial', fill: '#ffffff' });
+            this.add.text(800, 30*(i), `Score: ${obj.score} `, { font: '22px Arial', fill: '#ffffff' });
+        });
+        })();
           
+         
+        
 
-        console.log(this.data)
-
-        this.winningMusic = this.sound.add('winningMusic', { volume: 0.06, loop: false });
+        this.winningMusic = this.sound.add('winningMusic', { volume: 0.04, loop: false });
         this.winningMusic.play()
         
         var bg = this.add.graphics();
@@ -52,13 +64,14 @@ export default class Winning extends Phaser.Scene {
         progressBar.fillStyle(0xFFAA00,0.8);
         progressBar.fillRect(500, 200, 500, 400);
         
-          progressBar.depth = 100000
+          progressBar.depth = 0
 
-
-
-          
+          console.log()
+       
+        //this.registry.events.on('changedata', this.updateData, this);
           
     }
+    
     update() {
         
         

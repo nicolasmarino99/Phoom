@@ -155,7 +155,7 @@ export default class GameScene extends Phaser.Scene {
     function collectCoin(player, coin) {
       this.coinMusic.play();
       coin.disableBody(true, true);
-      gameState.name = 'Nick' 
+      gameState.name = '' 
       gameState.score += 20 
       this.scene.run('score-handler', {
         gameState,
