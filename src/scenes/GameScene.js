@@ -252,7 +252,7 @@ export default class GameScene extends Phaser.Scene {
       this.hero.flipX = false;
 
       if (this.cursors.shift.isDown) {
-        this.hero.setVelocityX(1170);
+        this.hero.setVelocityX(170);
 
         this.hero.anims.play('runSlow', true);
       } else if (this.cursors.down.isDown) {
