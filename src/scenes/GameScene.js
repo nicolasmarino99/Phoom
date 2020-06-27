@@ -94,16 +94,26 @@ export default class GameScene extends Phaser.Scene {
 
     })
     this.mushroom.get(500,100,'mushroom')
+    this.mushroom.get(2500,100,'mushroom')
+    this.mushroom.get(3500,100,'mushroom')
+    this.mushroom.get(5500,100,'mushroom')
     
     this.goblin = this.physics.add.group({
       classType: Goblin,
     })
     this.goblin.get(600,100,'goblin')
+    this.goblin.get(1600,100,'goblin')
+    this.goblin.get(2600,100,'goblin')
+    this.goblin.get(4600,100,'goblin')
 
     this.skeleton = this.physics.add.group({
       classType: Skeleton,
     })
-    this.skeleton.get(600,100,'skeleton')
+    this.skeleton.get(800,100,'skeleton')
+    this.skeleton.get(1800,100,'skeleton')
+    this.skeleton.get(4800,100,'skeleton')
+    this.skeleton.get(6800,100,'skeleton')
+
    
     
     

@@ -1,8 +1,8 @@
 import 'phaser';
 
-export default class scoresScene extends Phaser.Scene {
+export default class leaderboardScene extends Phaser.Scene {
     constructor () {
-        super('Scores')
+        super('leaderboard')
     }
 
     preload () {
