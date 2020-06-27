@@ -1,4 +1,5 @@
 import 'phaser';
+
 import {Align} from "../util/align";
 import {blueCoinAnims } from "../scenes/anims/coinsAnims/blueCoinAnims";
 import {greenCoinAnims} from "../scenes/anims/coinsAnims/greenCoinAnims";
@@ -37,7 +38,7 @@ export default class GameScene extends Phaser.Scene {
     let gameMusic = this.sound.add('gameMusic', { volume: 0.07, loop: true });
 
     this.scene.run('game-ui', {
-      gameData: gameState,
+      gameState,
       clock,
       gameMusic
     })
@@ -156,20 +157,23 @@ export default class GameScene extends Phaser.Scene {
       gameState.name = 'Nicolas' 
       gameState.score += 20 
       this.scene.run('score-handler', {
-        gameData: gameState,
+        gameState,
         clock,
         gameMusic
       })
     
     }
-
+   
+    
     function winGame(player, coin) {
      
       coin.disableBody(true, true);
       gameMusic.stop()
-      
+        
+      //postGameStats(gameState.score)
+    
       clock.stop();
-      this.scene.run('winning', {gameData: gameState,clock})  
+      this.scene.run('winning', {gameState,clock})  
       
     
     }

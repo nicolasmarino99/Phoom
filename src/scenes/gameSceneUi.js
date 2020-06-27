@@ -126,7 +126,8 @@ export default class gameUi extends Phaser.Scene {
           
     }
     update() {
-        this.clockStamp.setText(Phaser.Math.FloorTo(this.clock.now * 0.001));
+        this.timeNow = this.clock.now * 0.001
+        this.clockStamp.setText(Phaser.Math.FloorTo(this.timeNow));
         
         
     }
