@@ -65,18 +65,6 @@ When finish the level, it should appear the leaderboard
 <img src="src/assets/gif/phoomLB.gif">
 </p>
 
-Next screen is where you control the game. You have 4 options:
-
-
-
-
-4. #### Credits
-
-<p align="center">
-<img src="assets/screens/credits.png">
-</p>
-
-The credits for this game.
 
 [Up](#Table-of-Contents)
 
@@ -121,11 +109,13 @@ Use your terminal and run the commands after each instruction.
 
 [Up](#Table-of-Contents)
 
-## 👤 Author
+## Author
 
-- Github: [@macnick](https://github.com/macnick)
-- Twitter: [@mac_experts](https://twitter.com/mac_experts)
-- Linkedin: [Nick Haralampopoulos](https://www.linkedin.com/in/nick-haralampopoulos/)
+:man: **Nicolás Mariño Parra**
+
+- Github: [@nicolasmarino99](https://github.com/nicolasmarino99)
+- Twitter: [@nicolasmarino99](https://twitter.com/nicolasmarino99)
+- Linkedin: [Nicolás Mariño Parra](https://www.linkedin.com/in/nicol%C3%A1s-mari%C3%B1o-parra-45a707177/)
 
 ## 🤝 Contributing
 
