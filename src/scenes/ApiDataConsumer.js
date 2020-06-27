@@ -38,7 +38,6 @@ export const consumeGameData = {
       const newGameID = await postApiData(`${url}/games/`, {
         name: 'Phoom Game',
       });
-      console.log(newGameID);
       const newGameIDToJSON = JSON.parse(newGameID);
       const sliceArray = newGameIDToJSON.result.match(new RegExp('ID: ' + '(.*)' + ' added'));
       const [ID] = sliceArray[1];
