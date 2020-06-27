@@ -23,24 +23,27 @@ export default class Winning extends Phaser.Scene {
     
     create() {
 
-        const compare = () => {
-            const bandA = a.band.toUpperCase();
-            const bandB = b.band.toUpperCase();
+        const compare = (a,b) => {
+            const score1 = a.score
+            const score2 = b.score
 
             let comparison = 0;
-            if (bandA > bandB) {
-            comparison = 1;
-            } else if (bandA < bandB) {
+            if (score1 > score2) {
             comparison = -1;
+            } else if (score1 < score2) {
+            comparison = 1;
             }
             return comparison;
-            }
+        }
+
+
         (async () => {
         if (this.name !== '') {
             await consumeGameData.postGameStats(this.name, this.score);
             }
         let leaderBoard = await consumeGameData.getGamersStats()
         leaderBoard = JSON.parse(JSON.stringify(leaderBoard))
+        leaderBoard.sort(compare)
         leaderBoard.forEach( (obj,i) => {
             i+1
             this.add.text(550, 30*(i), obj.user, { font: '22px Arial', fill: '#ffffff' });
