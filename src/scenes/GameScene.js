@@ -23,6 +23,7 @@ export default class GameScene extends Phaser.Scene {
   init(data) {
     this.gameMusic = data.gameMusic
     this.clock = data.clock
+    this.queHizo = data.asdf
 
 }
 
@@ -154,7 +155,7 @@ export default class GameScene extends Phaser.Scene {
     function collectCoin(player, coin) {
       this.coinMusic.play();
       coin.disableBody(true, true);
-      gameState.name = 'Nicolas' 
+      gameState.name = 'Nick' 
       gameState.score += 20 
       this.scene.run('score-handler', {
         gameState,

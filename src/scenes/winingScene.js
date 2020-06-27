@@ -14,20 +14,30 @@ export default class Winning extends Phaser.Scene {
     init(data) {
        
         this.score = data.gameState.score
+        this.name = data.gameState.name
         //this.clock = data.clock
+        this.data = data
     
-        (async () => {
-            if (this.score) {
-              await consumeGameData.postGameStats('Nico', this.score);
-            }
-          })()
+        
         
     }
     
     create() {
-        
+       
+        (async () => {
+            if (this.score) {
+              await consumeGameData.postGameStats(this.name, this.score);
+            }
+          })();
 
-        console.log(this.score)
+          (async () => {
+            let leaderBoard = await consumeGameData.getGamersStats()
+            leaderBoard = JSON.parse(JSON.stringify(leaderBoard))
+            console.log(leaderBoard)
+          })();
+          
+
+        console.log(this.data)
 
         this.winningMusic = this.sound.add('winningMusic', { volume: 0.06, loop: false });
         this.winningMusic.play()

@@ -36,7 +36,7 @@ export const consumeGameData = {
     if (localStorage.getItem('game_id') !== null) {
       result = localStorage.getItem('game_id');
     } else {
-      const newGameID = await postData(`${url}/games/`, {
+      const newGameID = await postApiData(`${url}/games/`, {
         name: "Phoom Game",
       });
 
