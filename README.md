@@ -7,10 +7,8 @@ Phoom is a Platformer game built with Phaserjs
 - [Objective](#Objective)
 - [Learning process](#Learning-process)
 - [Gameplay](#Gameplay)
-- [How to Play](#How-to-Play)
 - [Technologies Used](#Technologies-Used)
-- [Live Version](#Live-version)
-- [Install and Run](#How-to-Install-and-Run-in-Your-Computer)
+- [Install in Your local Machine](#Install-in-Your-local-Machine)
 - [Acknowledgments](#Acknowledgments)
 
 ### Objective
@@ -70,7 +68,6 @@ When finish the level, it should appear the leaderboard
 
 ### Languages and technologies used 
 
-
 - Phaser 3
 - JavaScript
 - Babel
@@ -91,21 +88,20 @@ Use your terminal and run the commands after each instruction.
 
 | Command                                             | Description                                           |
 | --------------------------------------------------- | ----------------------------------------------------- |
-| `git clone https://github.com/macnick/RPG-game.git` | Clone the repository to you computer                  |
-| `cd RPG-game`                                       | Navigate to the newly created folder                  |
+| `git clone https://github.com/nicolasmarino99/Phoom.git` | Clone the repository to you computer                  |
+| `cd Phoom`                                          | Navigate to the newly created folder                  |
 | `npm install`                                       | Install dependencies and launch browser with examples |
-| `npm start`                                         | Makes the build and starts the development server     |
+| `npm run start`                                         | Makes the build and starts the development server     |
 |                                                     | Press `Ctrl + c` to kill **http-server** process      |
-| `http://localhost:8000`                             | Visit this link to play the game                      |
+| `http://localhost:8080`                             | Visit this link to play the game                      |
 
 [Up](#Table-of-Contents)
 
 ## Acknowledgements
 
-- Dark Forest Background image By Zeyu Ren 任泽宇
-- Button and enemy images by pennomi, Buch, cemkalyoncu at [opengameart.org](https://opengameart.org/)
-- Title image created using [textcraft.net](https://textcraft.net)
-- Player images by [craftpix.net](https://craftpix.net/)
+- ShwiggityShwag for the main music
+- So many assets that I don't have the names. I used [opengameart.org](https://opengameart.org/) and [itch.io](https://itch.io/) Thanks to all the artist. 
+
 
 [Up](#Table-of-Contents)
 
@@ -121,9 +117,9 @@ Use your terminal and run the commands after each instruction.
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/macnick/RPG-game/issues).
+Feel free to check the [issues page](https://github.com/nicolasmarino99/Phoom.git/issues).
 
-1. Fork it (https://github.com/macnick/RPG-game/fork)
+1. Fork it (https://github.com/nicolasmarino99/Phoom.git/fork)
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)

@@ -74,9 +74,6 @@ export default class Winning extends Phaser.Scene {
 
     progressBar.depth = 0;
 
-    console.log();
-
-    // this.registry.events.on('changedata', this.updateData, this);
   }
 
   update() {

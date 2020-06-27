@@ -17,7 +17,7 @@ export default class gameUi extends Phaser.Scene {
     const agrid = new AlignGrid({ scene: this, rows: 10, cols: 25 });
     // agrid.showNumbers()
     // this.gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
-    console.log(this.gameMusic);
+    
     this.gameMusic.play();
 
     this.soundOn = new Button(this, 50, 50, 'soundOn', 'soundOff', () => {
@@ -72,7 +72,6 @@ export default class gameUi extends Phaser.Scene {
     element.addListener('click');
 
     element.on('click', (event) => {
-      console.log(event);
       if (event.target.name === 'playButton') {
         const inputText = element.getChildByName('nameField');
 
