@@ -67,9 +67,7 @@ export default class PreloaderScene extends Phaser.Scene {
       './src/assets/fonts/menu3/font.png',
       './src/assets/fonts/menu3/font.fnt',
     );
-    // load custom Fonts
 
-    // create and aligned progress Bar and container. Render first Progress container
     const progressBar = this.add.graphics();
     const progressContainer = this.add.graphics();
     Align.center(progressBar);
@@ -77,7 +75,6 @@ export default class PreloaderScene extends Phaser.Scene {
     progressContainer.fillStyle(0x222222, 0.8);
     progressContainer.fillRect(-160, -10, 320, 50);
 
-    // Lets add and center loading, percentage and charged files texts
     const loadingText = this.make.text({
       x: 0,
       y: 0,
@@ -113,18 +110,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
     Align.center(fileText.setOrigin(0.5, -2.5));
 
-    /*
-
-    PROGRESS: used for see each loaded file (in ths case it was uploaded 501 images.
-    1 from the other scene and 500 false image calls) CB VALUE: divides each load operation between 0 to 1
-
-    FILEPROGRESS: returns from each load operation, its correspondly loaded file
-
-    COMPLETE: When progress reach 1 it does whatever is needed
-
-   */
     this.load.on('progress', value => {
-      // console.log(value);
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
       progressBar.fillRect(-150, 0, 300 * value, 30);
@@ -132,12 +118,10 @@ export default class PreloaderScene extends Phaser.Scene {
     });
 
     this.load.on('fileprogress', file => {
-      // console.log(file.src);
       fileText.setText(`Loading asserts:${file.src}`);
     });
 
     this.load.on('complete', () => {
-      // console.log('complete');
       progressBar.destroy();
       progressContainer.destroy();
       loadingText.destroy();
