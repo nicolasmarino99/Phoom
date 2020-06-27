@@ -1,16 +1,15 @@
 import 'phaser';
 
-
 export default class BootScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Boot');
   }
 
-  preload () {
+  preload() {
   }
 
-  create () {
-    this.input.setDefaultCursor('url(./src/assets/ui/cursor/cursor1.png), pointer')
-    this.scene.start('Preloader')
+  create() {
+    this.input.setDefaultCursor('url(./src/assets/ui/cursor/cursor1.png), pointer');
+    this.scene.start('Preloader');
   }
-};
+}

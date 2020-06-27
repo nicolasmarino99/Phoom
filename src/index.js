@@ -11,7 +11,7 @@ import scoreHandler from './Scenes/scoreHandler';
 import Winning from './Scenes/winingScene';
 
 class Game extends Phaser.Game {
-  constructor () {
+  constructor() {
     super(config);
     this.scene.add('Boot', BootScene);
     this.scene.add('Preloader', PreloaderScene);
@@ -25,5 +25,5 @@ class Game extends Phaser.Game {
     this.scene.start('Menu');
   }
 }
- 
+
 window.game = new Game();

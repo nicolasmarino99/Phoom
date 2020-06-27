@@ -1,15 +1,15 @@
 import 'phaser';
 
 export default class leaderboardScene extends Phaser.Scene {
-    constructor () {
-        super('leaderboard')
-    }
+  constructor() {
+    super('leaderboard');
+  }
 
-    preload () {
+  preload() {
 
-    }
+  }
 
-    create () {
-        
-    }
+  create() {
+
+  }
 }

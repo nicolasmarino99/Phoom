@@ -1,13 +1,13 @@
 import 'phaser';
- 
+
 export default class InstructionsScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Instructions');
   }
- 
-  preload () {
+
+  preload() {
   }
- 
-  create () {
+
+  create() {
   }
-};
+}
