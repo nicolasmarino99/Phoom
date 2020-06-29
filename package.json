@@ -4,8 +4,8 @@
   "description": "A Doom like project made on phaser",
   "main": "src/index.js",
   "scripts": {
-    "build": "webpack --config webpack/prod.js ",
-    "start": "npm i phaser3-rex-plugins && webpack-dev-server --config webpack/base.js --open"
+    "build": "npm i phaser3-rex-plugins && webpack --config webpack/prod.js ",
+    "start": " webpack-dev-server --config webpack/base.js --open"
   },
   "repository": {
     "type": "git",
