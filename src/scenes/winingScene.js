@@ -1,4 +1,4 @@
-import 'phaser';
+import'phaser';
 import { consumeGameData } from './ApiDataConsumer';
 import Button from './ui/Button';
 import { AlignGrid } from '../util/alignGrid';
