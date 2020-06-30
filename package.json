@@ -4,7 +4,7 @@
   "description": "A Doom like project made on phaser",
   "main": "src/index.js",
   "scripts": {
-    "build": "npm i phaser3-rex-plugins && webpack --config webpack/prod.js ",
+    "build": "webpack --config webpack/prod.js ",
     "start": " webpack-dev-server --config webpack/base.js --open"
   },
   "repository": {
@@ -31,7 +31,7 @@
     "eslint": "^7.3.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
-    "file-loader": "^4.2.0",
+    "file-loader": "^4.3.0",
     "html-webpack-plugin": "^3.2.0",
     "raw-loader": "^3.1.0",
     "terser-webpack-plugin": "^2.2.1",
