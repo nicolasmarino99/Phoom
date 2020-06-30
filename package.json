@@ -37,14 +37,16 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2",
+    "terser-webpack-plugin": "^2.3.7"
     
   },
   "dependencies": {
-    "webpack-merge": "^4.2.2",
+    
     "jslint": "^0.12.1",
     "phaser": "^3.20.1",
     "phaser-raycaster": "^0.8.0",
     "phaser3-rex-plugins": "^1.1.19",
-    "terser-webpack-plugin": "^2.3.7"
+    
   }
 }
