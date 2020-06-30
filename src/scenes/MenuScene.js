@@ -2,14 +2,15 @@ import 'phaser';
 import { AlignGrid } from '../util/alignGrid';
 import { Align } from '../util/align';
 import Button from './ui/Button';
-
+import a from '../assets/ui/rain/rain.png'
+import b from '../assets/ui/rain/rain.json'
 export default class MenuScene extends Phaser.Scene {
   constructor() {
     super('Menu');
   }
 
   preload() {
-    this.load.atlas('rain', '../assets/ui/rain/rain.png', '../assets/ui/rain/rain.json');
+    this.load.atlas('rain', a, b);
     this.load.bitmapFont(
       'font',
       '../assets/fonts/menu/font.png',
