@@ -9,30 +9,30 @@ export default class MenuScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.atlas('rain', '../assets/ui/rain/rain.png', './src/assets/ui/rain/rain.json');
+    this.load.atlas('rain', '../assets/ui/rain/rain.png', '../assets/ui/rain/rain.json');
     this.load.bitmapFont(
       'font',
-      './src/assets/fonts/menu/font.png',
-      './src/assets/fonts/menu/font.fnt',
+      '../assets/fonts/menu/font.png',
+      '../assets/fonts/menu/font.fnt',
     );
 
     // Load paralax layers
-    this.load.image('far', './src/assets/ui/background/far.png');
-    this.load.image('sand', './src/assets/ui/background/sand.png');
-    this.load.image('foreground-merged', './src/assets/ui/background/foreground-merged.png');
+    this.load.image('far', '../assets/ui/background/far.png');
+    this.load.image('sand', '../assets/ui/background/sand.png');
+    this.load.image('foreground-merged', '../assets/ui/background/foreground-merged.png');
 
     // Load buttons
-    this.load.audio('menuMusic', ['./src/assets/music/menu/menuMusic.ogg']);
-    this.load.image('blueButton1', './src/assets/ui/buttons/PNG/shiny/7.png');
-    this.load.image('blueButton2', './src/assets/ui/buttons/PNG/shiny/7shiny.png');
-    this.load.image('soundOn', './src/assets/ui/buttons/sound/soundOn.png');
-    this.load.image('soundOff', './src/assets/ui/buttons/sound/soundOff.png');
+    this.load.audio('menuMusic', ['../assets/music/menu/menuMusic.ogg']);
+    this.load.image('blueButton1', '../assets/ui/buttons/PNG/shiny/7.png');
+    this.load.image('blueButton2', '../assets/ui/buttons/PNG/shiny/7shiny.png');
+    this.load.image('soundOn', '../assets/ui/buttons/sound/soundOn.png');
+    this.load.image('soundOff', '../assets/ui/buttons/sound/soundOff.png');
   }
 
   create() {
     const agrid = new AlignGrid({ scene: this, rows: 10, cols: 25 });
 
-    this.input.setDefaultCursor('url(./src/assets/ui/cursor/cursor1.png), pointer');
+    this.input.setDefaultCursor('url(../assets/ui/cursor/cursor1.png), pointer');
 
     this.bgMusic = this.sound.add('menuMusic', { volume: 0.2, loop: true });
 
