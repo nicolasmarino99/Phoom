@@ -1,6 +1,6 @@
 const merge = require('webpack-merge');
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+//const LoaderOptionsPlugin = require('loader-options-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const base = require('./base');
 
@@ -25,15 +25,4 @@ module.exports = merge(base, {
       }),
     ],
   },
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      test: /\.(woff(2)?|ttf|eot|svg|fnt)(\?v=\d+\.\d+\.\d+)?$/,
-      options: {
-        loaders: {
-          name: '[name].[ext]',
-          outputPath: 'fonts/'
-        }
-      }
-    })
-  ]
 });
