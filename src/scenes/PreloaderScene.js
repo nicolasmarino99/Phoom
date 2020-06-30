@@ -19,6 +19,7 @@ import bossJSON from '../assets/level1/enemies/boss/boss.json';
 import portalJSON from '../assets/portals/portal2/portal2.json';
 import portalimg from '../assets/portals/portal2/portal2.png';
 
+
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
     super('Preloader');

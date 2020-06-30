@@ -9,7 +9,7 @@ export default class MenuScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.atlas('rain', './src/assets/ui/rain/rain.png', './src/assets/ui/rain/rain.json');
+    this.load.atlas('rain', '../assets/ui/rain/rain.png', './src/assets/ui/rain/rain.json');
     this.load.bitmapFont(
       'font',
       './src/assets/fonts/menu/font.png',
