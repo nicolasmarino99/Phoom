@@ -4,13 +4,13 @@ import { Align } from '../util/align';
 import Button from './ui/Button';
 import rainImg from '../assets/ui/rain/rain.png';
 import rainJSON from '../assets/ui/rain/rain.json';
-import fontImg from '../assets/fonts/menu/font.png';
-import fontFnt from '../assets/fonts/menu/font.fnt';
+//import fontImg from '../assets/fonts/menu/font.png';
+//import fontFnt from '../assets/fonts/menu/font.fnt';
 
 import farImg from '../assets/ui/background/far.png';
 import sandImg from '../assets/ui/background/sand.png';
 import foregroundmergedImg from '../assets/ui/background/foreground-merged.png';
-import menuMusic from '../assets/music/menu/menuMusic.ogg';
+//import menuMusic from '../assets/music/menu/menuMusic.ogg';
 import img7 from '../assets/ui/buttons/PNG/shiny/7.png';
 import img7shiny from '../assets/ui/buttons/PNG/shiny/7shiny.png';
 import soundOnImg from '../assets/ui/buttons/sound/soundOn.png';
@@ -25,11 +25,11 @@ export default class MenuScene extends Phaser.Scene {
 
   preload() {
     this.load.atlas('rain', rainImg, rainJSON);
-    this.load.bitmapFont(
-      'font',
-      fontImg,
-      fontFnt,
-    );
+    //this.load.bitmapFont(
+    //  'font',
+    //  fontImg,
+    //  fontFnt,
+    //);
 
     // Load paralax layers
     this.load.image('far', farImg);
@@ -37,7 +37,7 @@ export default class MenuScene extends Phaser.Scene {
     this.load.image('foreground-merged', foregroundmergedImg);
 
     // Load buttons
-    this.load.audio('menuMusic', [menuMusic]);
+    //this.load.audio('menuMusic', [menuMusic]);
     this.load.image('blueButton1', img7);
     this.load.image('blueButton2', img7shiny);
     this.load.image('soundOn', soundOnImg);
