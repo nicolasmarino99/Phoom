@@ -6,25 +6,6 @@ const base = require('./base');
 
 module.exports = merge(base, {
   mode: 'production',
-  loaders: [
-    {
-      test: /\.scss$/,
-      loader: 'style-loader!css-loader!sass-loader'
-    },
-    {
-      test: /\.(woff(2)?|ttf|eot|svg|fnt)(\?v=\d+\.\d+\.\d+)?$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'fonts/'
-          }
-        }
-      ]
-    }
-  ],
-  
   output: {
     filename: 'bundle.min.js',
   },
@@ -44,5 +25,15 @@ module.exports = merge(base, {
       }),
     ],
   },
-  watch: true
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      test: /\.(woff(2)?|ttf|eot|svg|fnt)(\?v=\d+\.\d+\.\d+)?$/,
+      options: {
+        loaders: {
+          name: '[name].[ext]',
+          outputPath: 'fonts/'
+        }
+      }
+    })
+  ]
 });
