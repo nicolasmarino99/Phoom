@@ -2,38 +2,52 @@ import 'phaser';
 import { AlignGrid } from '../util/alignGrid';
 import { Align } from '../util/align';
 import Button from './ui/Button';
-import a from '../assets/ui/rain/rain.png'
-import b from '../assets/ui/rain/rain.json'
+import rainImg from '../assets/ui/rain/rain.png';
+import rainJSON from '../assets/ui/rain/rain.json';
+import fontImg from '../assets/fonts/menu/font.png';
+import fontFnt from '../assets/fonts/menu/font.fnt';
+
+import farImg from '../assets/ui/background/far.png';
+import sandImg from '../assets/ui/background/sand.png';
+import foregroundmergedImg from '../assets/ui/background/foreground-merged.png';
+import menuMusic from '../assets/music/menu/menuMusic.ogg';
+import img7 from '../assets/ui/buttons/PNG/shiny/7.png';
+import img7shiny from '../assets/ui/buttons/PNG/shiny/7shiny.png';
+import soundOnImg from '../assets/ui/buttons/sound/soundOn.png';
+import soundOffImg from '../assets/ui/buttons/sound/soundOff.png';
+import cursor1Img from '../assets/ui/cursor/cursor1.png';
+
+
 export default class MenuScene extends Phaser.Scene {
   constructor() {
     super('Menu');
   }
 
   preload() {
-    this.load.atlas('rain', a, b);
+    this.load.atlas('rain', rainImg, rainJSON);
     this.load.bitmapFont(
       'font',
-      '../assets/fonts/menu/font.png',
-      '../assets/fonts/menu/font.fnt',
+      fontImg,
+      fontFnt,
     );
 
     // Load paralax layers
-    this.load.image('far', '../assets/ui/background/far.png');
-    this.load.image('sand', '../assets/ui/background/sand.png');
-    this.load.image('foreground-merged', '../assets/ui/background/foreground-merged.png');
+    this.load.image('far', farImg);
+    this.load.image('sand', sandImg);
+    this.load.image('foreground-merged', foregroundmergedImg);
 
     // Load buttons
-    this.load.audio('menuMusic', ['../assets/music/menu/menuMusic.ogg']);
-    this.load.image('blueButton1', '../assets/ui/buttons/PNG/shiny/7.png');
-    this.load.image('blueButton2', '../assets/ui/buttons/PNG/shiny/7shiny.png');
-    this.load.image('soundOn', '../assets/ui/buttons/sound/soundOn.png');
-    this.load.image('soundOff', '../assets/ui/buttons/sound/soundOff.png');
+    this.load.audio('menuMusic', [menuMusic]);
+    this.load.image('blueButton1', img7);
+    this.load.image('blueButton2', img7shiny);
+    this.load.image('soundOn', soundOnImg);
+    this.load.image('soundOff', soundOffImg);
   }
 
   create() {
     const agrid = new AlignGrid({ scene: this, rows: 10, cols: 25 });
 
-    this.input.setDefaultCursor('url(../assets/ui/cursor/cursor1.png), pointer');
+    this.input.setDefaultCursor(`url(${cursor1Img}), pointer`);
 
     this.bgMusic = this.sound.add('menuMusic', { volume: 0.2, loop: true });
 
