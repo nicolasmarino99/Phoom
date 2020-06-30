@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const base = require('./base');
 
@@ -10,8 +11,8 @@ module.exports = merge(base, {
   },
   devtool: false,
   performance: {
-    maxEntrypointSize: 900000,
-    maxAssetSize: 900000,
+    maxEntrypointSize: 1900000,
+    maxAssetSize: 1900000,
   },
   optimization: {
     minimizer: [
@@ -24,4 +25,11 @@ module.exports = merge(base, {
       }),
     ],
   },
+  //plugins: [
+  //  new CopyWebpackPlugin([
+  //    {
+  //      from: path.resolve(__dirname, '.src/assets', '**', '*'),
+  //      to: path.resolve(__dirname, 'dist'),
+  //    },
+  //  ]),
 });
