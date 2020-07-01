@@ -23,7 +23,7 @@ export default class MenuScene extends Phaser.Scene {
     this.load.atlas('rain', rainImg, rainJSON);
     this.load.bitmapFont(
       'font',
-      fontImg
+      fontImg,
       fontFnt
     );
     // Load paralax layers
