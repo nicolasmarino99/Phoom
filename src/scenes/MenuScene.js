@@ -9,7 +9,7 @@ import fontFnt from '../assets/fonts/menu/font.fnt';
 import farImg from '../assets/ui/background/far.png';
 import sandImg from '../assets/ui/background/sand.png';
 import foregroundmergedImg from '../assets/ui/background/foreground-merged.png';
-import menuMusic from './src/assets/music/menu/menuMusic.ogg';
+import menuMusic from '../assets/music/menu/menuMusic.ogg';
 import img7 from '../assets/ui/buttons/PNG/shiny/7.png';
 import img7shiny from '../assets/ui/buttons/PNG/shiny/7shiny.png';
 import soundOnImg from '../assets/ui/buttons/sound/soundOn.png';
