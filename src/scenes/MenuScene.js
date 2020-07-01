@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import { AlignGrid } from '../util/alignGrid';
 import { Align } from '../util/align';
 import Button from './ui/Button';
