@@ -16,7 +16,6 @@ import soundOnImg from '../assets/ui/buttons/sound/soundOn.png';
 import soundOffImg from '../assets/ui/buttons/sound/soundOff.png';
 import cursor1Img from '../assets/ui/cursor/cursor1.png';
 
-// eslint-disable-next-line no-undef
 export default class MenuScene extends Phaser.Scene {
   constructor() {
     super('Menu');
