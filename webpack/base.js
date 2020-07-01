@@ -23,6 +23,22 @@ module.exports = {
         test: /\.(gif|png|jpe?g|svg|xml)$/i,
         use: 'file-loader',
       },
+      {
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        use: 'file-loader',
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg|fnt)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
