@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const blueCoinAnims = (game) => {
   game.anims.create({
     key: 'shine1',

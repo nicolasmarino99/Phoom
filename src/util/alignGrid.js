@@ -1,8 +1,8 @@
+// eslint-disable-next-line import/prefer-default-export
 export class AlignGrid {
   constructor(config) {
     this.config = config;
     if (!config.scene) {
-      console.log('missing scene');
       return;
     }
     if (!config.rows) {
@@ -12,9 +12,11 @@ export class AlignGrid {
       config.cols = 5;
     }
     if (!config.height) {
+      // eslint-disable-next-line no-undef
       config.height = game.config.height;
     }
     if (!config.width) {
+      // eslint-disable-next-line no-undef
       config.width = game.config.width;
     }
 
@@ -30,12 +32,12 @@ export class AlignGrid {
     this.graphics = this.scene.add.graphics();
     this.graphics.lineStyle(2, 0xff0000);
 
-		 for (var i = 0; i < this.config.width; i += this.cw) {
-		            this.graphics.moveTo(i, 0);
-		            this.graphics.lineTo(i, this.config.height);
-		        }
+    for (let i = 0; i < this.config.width; i += this.cw) {
+      this.graphics.moveTo(i, 0);
+      this.graphics.lineTo(i, this.config.height);
+    }
 
-		  for (var i = 0; i < this.config.height; i += this.ch) {
+		  for (let i = 0; i < this.config.height; i += this.ch) {
 		            this.graphics.moveTo(0, i);
 		            this.graphics.lineTo(this.config.width, i);
 		        }
@@ -63,13 +65,13 @@ export class AlignGrid {
     this.show();
     let count = 0;
 		 for (let i = 0; i < this.config.rows; i++) {
-		            for (let j = 0; j < this.config.cols; j++) {
-		            	const numText = this.scene.add.text(0, 0, count, { color: '#ff0000' });
-		            	numText.setOrigin(0.5, 0.5);
-		            	this.placeAtIndex(count, numText);
+		    for (let j = 0; j < this.config.cols; j++) {
+		    	const numText = this.scene.add.text(0, 0, count, { color: '#ff0000' });
+		    	numText.setOrigin(0.5, 0.5);
+		    	this.placeAtIndex(count, numText);
 
-		            	count++;
-		            }
-		        }
+		    	count++;
+		    }
+    }
   }
 }

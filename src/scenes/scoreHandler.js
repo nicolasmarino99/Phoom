@@ -1,5 +1,6 @@
 import 'phaser';
 
+// eslint-disable-next-line no-undef
 export default class scoreHandler extends Phaser.Scene {
   constructor() {
     super('score-handler');

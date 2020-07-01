@@ -10,6 +10,7 @@ import gameUi from './scenes/gameSceneUi';
 import scoreHandler from './scenes/scoreHandler';
 import Winning from './scenes/winingScene';
 
+// eslint-disable-next-line no-undef
 class Game extends Phaser.Game {
   constructor() {
     super(config);

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const mushroomAnims = (game) => {
   game.anims.create({
     key: 'attack',

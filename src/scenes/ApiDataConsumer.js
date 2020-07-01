@@ -29,6 +29,7 @@ const postApiData = async (base = '', data = {}) => {
   return JSON.stringify(await response.json());
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export const consumeGameData = {
   async getGameID(url = baseUrl) {
     let result;
@@ -39,6 +40,7 @@ export const consumeGameData = {
         name: 'Phoom Game',
       });
       const newGameIDToJSON = JSON.parse(newGameID);
+      // eslint-disable-next-line no-useless-concat
       const sliceArray = newGameIDToJSON.result.match(new RegExp('ID: ' + '(.*)' + ' added'));
       const [ID] = sliceArray[1];
       localStorage.setItem('Mygame_id', ID);
@@ -58,6 +60,6 @@ export const consumeGameData = {
     const response = await getApiData(
       `${url}/games/${await this.getGameID()}/scores`,
     );
-    return JSON.parse(await response).result;
+    return JSON.parse(response).result;
   },
 };

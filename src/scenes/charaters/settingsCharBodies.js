@@ -7,6 +7,7 @@ const enemiesSettings = (child) => {
   child.body.onCollide = false;
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export const adjustBodies = (scenario) => {
   scenario.hero.body.setSize(scenario.hero.width * 0.5, scenario.hero.height * 0.8);
   scenario.hero.body.offset.x = 10;

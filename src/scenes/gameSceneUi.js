@@ -1,8 +1,7 @@
 import 'phaser';
 import Button from './ui/Button';
 import { AlignGrid } from '../util/alignGrid';
-import { Align } from '../util/align';
-
+// eslint-disable-next-line no-undef
 export default class gameUi extends Phaser.Scene {
   constructor() {
     super('game-ui');
@@ -17,10 +16,11 @@ export default class gameUi extends Phaser.Scene {
     const agrid = new AlignGrid({ scene: this, rows: 10, cols: 25 });
     // agrid.showNumbers()
     // this.gameMusic = this.sound.add('gameMusic', { volume: 0.2, loop: true });
-    
+
     this.gameMusic.play();
 
     this.soundOn = new Button(this, 50, 50, 'soundOn', 'soundOff', () => {
+      // eslint-disable-next-line no-unused-expressions
       this.gameMusic.stop() ? this.gameMusic.stop() : this.gameMusic.play();
     });
 
@@ -110,6 +110,7 @@ export default class gameUi extends Phaser.Scene {
 
   update() {
     this.timeNow = this.clock.now * 0.001;
+    // eslint-disable-next-line no-undef
     this.clockStamp.setText(Phaser.Math.FloorTo(this.timeNow));
   }
 }

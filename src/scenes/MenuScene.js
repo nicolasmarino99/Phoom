@@ -15,16 +15,19 @@ import img7shiny from '../assets/ui/buttons/PNG/shiny/7shiny.png';
 import soundOnImg from '../assets/ui/buttons/sound/soundOn.png';
 import soundOffImg from '../assets/ui/buttons/sound/soundOff.png';
 import cursor1Img from '../assets/ui/cursor/cursor1.png';
+
+// eslint-disable-next-line no-undef
 export default class MenuScene extends Phaser.Scene {
   constructor() {
     super('Menu');
   }
+
   preload() {
     this.load.atlas('rain', rainImg, rainJSON);
     this.load.bitmapFont(
       'font',
       fontImg,
-      fontFnt
+      fontFnt,
     );
     // Load paralax layers
     this.load.image('far', farImg);
@@ -37,6 +40,7 @@ export default class MenuScene extends Phaser.Scene {
     this.load.image('soundOn', soundOnImg);
     this.load.image('soundOff', soundOffImg);
   }
+
   create() {
     const agrid = new AlignGrid({ scene: this, rows: 10, cols: 25 });
     this.input.setDefaultCursor(`url(${cursor1Img}), pointer`);
@@ -48,6 +52,7 @@ export default class MenuScene extends Phaser.Scene {
     this.leaderBoardText = this.add.text(0, 0, 'Leaderboard', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '40px', fill: '#fff' });
     agrid.placeAtIndex(184, this.leaderBoardText.setOrigin(-0.3, 0.5));
     this.leaderBoardText.depth = 101;
+    // eslint-disable-next-line max-len
     // this.gameTextB = this.add.text(0, 0, 'Play', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '40px', fill: '#fff' });
     // agrid.placeAtIndex(161,this.gameTextB.setOrigin(-0.3,0.5))
     // this.gameTextB.depth=101
@@ -70,6 +75,7 @@ export default class MenuScene extends Phaser.Scene {
     // agrid.placeAtIndex(162,this.as )
     // this.as.depth=100
     this.soundOn = new Button(this, 50, 50, 'soundOn', 'soundOff', () => {
+      // eslint-disable-next-line no-unused-expressions
       this.bgMusic.stop() ? this.bgMusic.stop() : this.bgMusic.play();
     });
     this.soundOn.depth = 200;
@@ -128,6 +134,7 @@ export default class MenuScene extends Phaser.Scene {
     });
     // agrid.showNumbers()
   }
+
   update() {
     const rainAnim = this.rainFrame.anims.play('rainy', true);
     Align.center(rainAnim);

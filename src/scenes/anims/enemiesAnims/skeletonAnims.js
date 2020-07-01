@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const skeletonAnims = (game) => {
   game.anims.create({
     key: 'attackske',

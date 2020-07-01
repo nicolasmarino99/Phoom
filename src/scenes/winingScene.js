@@ -1,10 +1,8 @@
-import'phaser';
+import 'phaser';
 import { consumeGameData } from './ApiDataConsumer';
-import Button from './ui/Button';
-import { AlignGrid } from '../util/alignGrid';
-import { Align } from '../util/align';
 import 'babel-polyfill';
 
+// eslint-disable-next-line no-undef
 export default class Winning extends Phaser.Scene {
   constructor(score = 0) {
     super('winning');
@@ -73,10 +71,5 @@ export default class Winning extends Phaser.Scene {
     progressBar.fillRect(500, 200, 500, 400);
 
     progressBar.depth = 0;
-
-  }
-
-  update() {
-
   }
 }

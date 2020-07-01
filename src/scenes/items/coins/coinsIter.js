@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const addCoinsToScenario = (scenario) => {
   scenario.coinsb = scenario.physics.add.group({
     key: 'cb',

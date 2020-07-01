@@ -13,6 +13,7 @@ import Skeleton from './charaters/enemies/Skeleton';
 import { adjustBodies } from './charaters/settingsCharBodies';
 import { addCoinsToScenario } from './items/coins/coinsIter';
 
+// eslint-disable-next-line no-undef
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -22,10 +23,6 @@ export default class GameScene extends Phaser.Scene {
     this.gameMusic = data.gameMusic;
     this.clock = data.clock;
     this.queHizo = data.asdf;
-  }
-
-  preload() {
-
   }
 
   create() {
@@ -199,7 +196,7 @@ export default class GameScene extends Phaser.Scene {
     this.stepsMusic = this.sound.add('steps', { volume: 0.02, loop: true, rate: 1.44 });
   }
 
-  update(x, dx) {
+  update() {
     this.portal.anims.play('portal', true);
     this.portal.body.setSize(this.hero.width * 0.5, this.hero.height * 0.0);
     // this.heroi.anims.play('attack1',true);

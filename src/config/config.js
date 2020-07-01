@@ -1,7 +1,8 @@
 import 'phaser';
-import ClockPlugin from 'phaser3-rex-plugins/plugins/clock-plugin.js';
+import ClockPlugin from 'phaser3-rex-plugins/plugins/clock-plugin';
 
 export default {
+  // eslint-disable-next-line no-undef
   type: Phaser.AUTO,
   parent: 'phaser-example',
   width: 1500,
@@ -22,7 +23,9 @@ export default {
 
   },
   scale: {
+    // eslint-disable-next-line no-undef
     mode: Phaser.Scale.FIT,
+    // eslint-disable-next-line no-undef
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   dom: {
