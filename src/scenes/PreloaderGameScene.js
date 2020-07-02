@@ -65,8 +65,6 @@ export default class PreloaderGameScene extends Phaser.Scene {
     this.load.audio('winningMusic', [winningMusic]);
     this.load.audio('steps', [steps]);
 
-    this.load.html('nameform', './src/assets/text/nameform.html');
-
     this.load.image('pause1', pause1);
     this.load.image('pause2', pause2);
 
