@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { AlignGrid } from '../util/alignGrid';
 import { Align } from '../util/align';
-// import cursor1Img from './src/assets/ui/cursor/cursor1.png';
+import cursor1Img from '../assets/ui/cursor/cursor1.png';
 import Button from './ui/Button';
 
 // eslint-disable-next-line no-undef
@@ -12,7 +12,7 @@ export default class MenuScene extends Phaser.Scene {
 
   create() {
     const agrid = new AlignGrid({ scene: this, rows: 10, cols: 25 });
-    this.input.setDefaultCursor('url(./src/assets/ui/cursor/cursor1.png), pointer');
+    this.input.setDefaultCursor(`url(${cursor1Img}), pointer`);
     this.bgMusic = this.sound.add('menuMusic', { volume: 0.2, loop: true });
     this.bgMusic.play();
     this.gameText = this.add.text(0, 0, 'Play', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '40px', fill: '#fff' });

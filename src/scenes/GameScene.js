@@ -26,7 +26,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.html('nameform', './src/assets/text/nameform.html');
+    this.load.html('nameform', 'assets/text/nameform.html');
   }
 
   create() {
