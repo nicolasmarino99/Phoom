@@ -12,6 +12,10 @@ export default class gameUi extends Phaser.Scene {
     this.clock = data.clock;
   }
 
+  preload() {
+    this.load.html('nameform', 'src/assets/text/nameform.html');
+  }
+
   create() {
     const agrid = new AlignGrid({ scene: this, rows: 10, cols: 25 });
     // agrid.showNumbers()

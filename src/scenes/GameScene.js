@@ -25,10 +25,6 @@ export default class GameScene extends Phaser.Scene {
     this.queHizo = data.asdf;
   }
 
-  preload() {
-    this.load.html('nameform', 'assets/text/nameform.html');
-  }
-
   create() {
     const gameState = {
       score: 0,
