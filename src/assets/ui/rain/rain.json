@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "rain.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1032,
+				"h": 242
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "rain_drops-01.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 240
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 240
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 256,
+						"h": 240
+					}
+				},
+				{
+					"filename": "rain_drops-02.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 240
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 240
+					},
+					"frame": {
+						"x": 259,
+						"y": 1,
+						"w": 256,
+						"h": 240
+					}
+				},
+				{
+					"filename": "rain_drops-03.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 240
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 240
+					},
+					"frame": {
+						"x": 517,
+						"y": 1,
+						"w": 256,
+						"h": 240
+					}
+				},
+				{
+					"filename": "rain_drops-04.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 240
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 240
+					},
+					"frame": {
+						"x": 775,
+						"y": 1,
+						"w": 256,
+						"h": 240
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:2c8f577b7a7671b62a154755105129ba:d86a1131de0c9d680ee8235e6c415890:e8cfc8249e9bc780202c75b53a681322$"
+	}
+}

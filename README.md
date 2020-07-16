@@ -1,55 +1,134 @@
-# Phaser 3 Webpack Project Template
+# Phoom a JavaScript Platformer game
 
-A Phaser 3 project template with ES6 support via [Babel 7](https://babeljs.io/) and [Webpack 4](https://webpack.js.org/)
-that includes hot-reloading for development and production-ready builds.
+Phoom is a Platformer game built with Phaserjs
 
-Loading images via JavaScript module `import` is also supported.
+## Table of Contents
 
-## Requirements
+- [Objective](#Objective)
+- [Learning process](#Learning-process)
+- [Gameplay](#Gameplay)
+- [Technologies Used](#Technologies-Used)
+- [Install in Your local Machine](#Install-in-Your-local-Machine)
+- [Acknowledgments](#Acknowledgments)
 
-[Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
+### Objective
 
-## Available Commands
+The main goal of this project is to explore and learn the javascript game engine 'phaser', integrating modern technologies (EcmaScript, webpack, npm) for extending the capabilities of the tool (phaser) while testing some code and consuming third party API's.
 
-| Command | Description |
-|---------|-------------|
-| `npm install` | Install project dependencies |
-| `npm start` | Build project and open web server running project |
-| `npm run build` | Builds code bundle with production settings (minification, uglification, etc..) |
+In this game you could find:
 
-## Writing Code
+- A fully functional hero with 3 types of attacks, jumps, and slides
+- A set of enemies moving and attacking automatically
+- A nice level design with tiles, with a paralax background
+- A clock and recolected gems for computing scores
+- A leaderboard that shows up at the end of each level
+- Nice background music
+- Nice User experience 
+- Nice set of animations
 
-After cloning the repo, run `npm install` from your project directory. Then, you can start the local development
-server by running `npm start`.
+The following features are under construction:
+
+- Health and item's manager 
+- Combat system between characters
+- Enemies AI
+- Enemies health
+- async testing 
+
+ 
+
+[Up](#Table-of-Contents)
+
+### Learning process
+
+I decided to integrate a gitBook documentation with this repository for showing step by step how I made this project. The book is still in progress though.
+
+[Make phoom step by step](https://us-central1-js-capstone-backend.cloudfunctions.net/api/)
 
 
-After starting the development server with `npm start`, you can edit any files in the `src` folder
-and webpack will automatically recompile and reload your server (available at `http://localhost:8080`
-by default).
+[Up](#Table-of-Contents)
 
-## Customizing Template
+### Gameplay
 
-### Babel
-You can write modern ES6+ JavaScript and Babel will transpile it to a version of JavaScript that you
-want your project to support. The targeted browsers are set in the `.babelrc` file and the default currently
-targets all browsers with total usage over "0.25%" but excludes IE11 and Opera Mini.
+1. #### Start Screen
 
-  ```
-  "browsers": [
-    ">0.25%",
-    "not ie 11",
-    "not op_mini all"
-  ]
-  ```
+The velocity of the hero is faster for show you the entire map.
 
-### Webpack
-If you want to customize your build, such as adding a new webpack loader or plugin (i.e. for loading CSS or fonts), you can
-modify the `webpack/base.js` file for cross-project changes, or you can modify and/or create
-new configuration files and target them in specific npm tasks inside of `package.json'.
+<p align="center">
+<img src="src/assets/gif/phoom.gif">
+</p>
 
-## Deploying Code
-After you run the `npm run build` command, your code will be built into a single bundle located at 
-`dist/bundle.min.js` along with any other assets you project depended. 
+When finish the level, it should appear the leaderboard
 
-If you put the contents of the `dist` folder in a publicly-accessible location (say something like `http://mycoolserver.com`), 
-you should be able to open `http://mycoolserver.com/index.html` and play your game.
+<p align="center">
+<img src="src/assets/gif/phoomLB.gif">
+</p>
+
+
+[Up](#Table-of-Contents)
+
+### Languages and technologies used 
+
+- Phaser 3
+- JavaScript
+- Babel
+- ESlint
+- npm
+- Webpack
+- HTML/CSS
+- Nodejs
+- third party API
+
+[Up](#Table-of-Contents)
+
+### Install in Your local Machine
+
+To run the scripts **npm** is required. To get npm you have to install [Node.js](https://nodejs.org). Follow the installation instructions for your system Mac, Linux or Windows.
+
+Use your terminal and run the commands after each instruction.
+
+| Command                                             | Description                                           |
+| --------------------------------------------------- | ----------------------------------------------------- |
+| `git clone https://github.com/nicolasmarino99/Phoom.git` | Clone the repository to you computer                  |
+| `cd Phoom`                                          | Navigate to the newly created folder                  |
+| `npm install`                                       | Install dependencies and launch browser with examples |
+| `npm run start`                                         | Makes the build and starts the development server     |
+|                                                     | Press `Ctrl + c` to kill **http-server** process      |
+| `http://localhost:8080`                             | Visit this link to play the game                      |
+
+[Up](#Table-of-Contents)
+
+## Acknowledgements
+
+- ShwiggityShwag for the main music
+- So many assets that I don't have the names. I used [opengameart.org](https://opengameart.org/) and [itch.io](https://itch.io/) Thanks to all the artist. 
+
+
+[Up](#Table-of-Contents)
+
+## Author
+
+:man: **Nicolás Mariño Parra**
+
+- Github: [@nicolasmarino99](https://github.com/nicolasmarino99)
+- Twitter: [@nicolasmarino99](https://twitter.com/nicolasmarino99)
+- Linkedin: [Nicolás Mariño Parra](https://www.linkedin.com/in/nicol%C3%A1s-mari%C3%B1o-parra-45a707177/)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/nicolasmarino99/Phoom.git/issues).
+
+1. Fork it (https://github.com/nicolasmarino99/Phoom.git/fork)
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create a new Pull Request
+
+## Show your support
+
+Give a ⭐️ if you enjoyed this project!
+
+## 📝 License
+
+This project is [MIT](lic.url) licensed.
